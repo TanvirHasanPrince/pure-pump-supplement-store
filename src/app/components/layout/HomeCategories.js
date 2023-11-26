@@ -3,7 +3,7 @@ import SectionHeaders from "./SectionHeaders";
 
 const HomeCategories = () => {
   return (
-    <section className="">
+    <section className="mt-10">
       <div className="text-center mb-4">
         <SectionHeaders subHeader={"Check Our"} mainHeader={'Supplements'}></SectionHeaders>
       </div>

@@ -3,7 +3,7 @@ import RightArrow from "../icons/RightArrow";
 
 const Hero = () => {
   return (
-    <section className="hero">
+    <section className="hero mt-20">
       <div className="py-12">
         <h1 className="text-4xl font-semibold">
           Unleash <br /> Your Peak Performance with&nbsp;

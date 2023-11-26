@@ -4,7 +4,7 @@ import SectionHeaders from './SectionHeaders';
 const HomeTestimonials = () => {
  return (
    <div>
-     <section class="mb-32 text-center">
+     <section class="mt-10 text-center">
        <SectionHeaders
          subHeader={"Reviews from our"}
          mainHeader={"Customers"}
