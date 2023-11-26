@@ -36,7 +36,7 @@ const Hero = () => {
       <div className="relative">
         <Image
           src={
-            "/png-transparent-dietary-supplement-creatine-whey-protein-nutrition-bodybuilding-supplement-nutrition-nutrition-whey-dietary-supplement-thumbnail.png"
+            "/banner-gym-supplements-jpeg.png"
           }
           layout={"fill"}
           objectFit={"contain"}
