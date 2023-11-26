@@ -15,11 +15,11 @@ const Header = () => {
       </nav>
 
       <nav className="flex items-center justify-between gap-4 font-bold">
-        <Link href={""} className="bg-primary text-white px-8 py-2 rounded-md">
+        <Link href={"/login"} className="bg-primary text-white px-8 py-2 rounded-md">
           Login
         </Link>
         <Link
-          href={""}
+          href={"/register"}
           className="bg-secondary text-black px-8 py-2 rounded-md"
         >
           Register
