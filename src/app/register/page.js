@@ -32,7 +32,7 @@ const RegisterPage = () => {
   }
 
   return (
-    <section className="mt-10">
+    <section className="mt-10 ">
       <h1 className="text-center text-primary text-4xl font-bold mb-4">
         Register
       </h1>
@@ -86,7 +86,7 @@ const RegisterPage = () => {
           </Link>
         </div>
       </form>
-      <div></div>
+
     </section>
   );
 };
