@@ -79,6 +79,12 @@ const RegisterPage = () => {
           ></Image>{" "}
           Login with google
         </button>
+        <div className="text center my-4" >
+          Already have an account?{" "}
+          <Link className="text-primary font-bold" href={"/login"}>
+            Login Here
+          </Link>
+        </div>
       </form>
       <div></div>
     </section>
