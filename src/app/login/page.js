@@ -13,7 +13,7 @@ const LoginPage = () => {
     ev.preventDefault();
     setLoginInProgress(true);
 
-    await signIn("credentials", {email, password});
+    await signIn("credentials", { email, password });
     setLoginInProgress(false);
   }
 
