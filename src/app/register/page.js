@@ -2,6 +2,7 @@
 import Image from "next/image";
 import React, { useState } from "react";
 import Link from "next/link";
+import { signIn } from "next-auth/react";
 
 const RegisterPage = () => {
   const [email, setEmail] = useState("");
@@ -70,7 +71,11 @@ const RegisterPage = () => {
           Register
         </button>
         <div className="my-4 text-center text-gray-500">OR</div>
-        <button className="flex gap-1 w-full font-bold rounded-lg px-6 py-2 border border-gray-300 text-black justify-center ">
+        <button
+          type="button"
+          className="flex gap-1 w-full font-bold rounded-lg px-6 py-2 border border-gray-300 text-black justify-center "
+          onClick={() => signIn("google", { callbackUrl: "/" })}
+        >
           <Image
             src={"/google-icon.png"}
             alt="Google logo"
@@ -79,14 +84,13 @@ const RegisterPage = () => {
           ></Image>{" "}
           Login with google
         </button>
-        <div className="text center my-4" >
+        <div className="text center my-4">
           Already have an account?{" "}
           <Link className="text-primary font-bold" href={"/login"}>
             Login Here
           </Link>
         </div>
       </form>
-
     </section>
   );
 };
