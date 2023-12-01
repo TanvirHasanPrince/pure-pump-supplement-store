@@ -31,7 +31,7 @@ const Header = () => {
           <>
             <Link
               href={"/profile"}
-              className="bg-secondary text-black px-8 py-2 rounded-md"
+              className="bg-secondary text-black px-8 py-2 rounded-md font-bold"
             >
               {userName}
             </Link>
