@@ -75,23 +75,22 @@ const ProfilePage = () => {
     }
   }
 
-  async function handleFileChange(ev) {
-    const files = ev?.target.files;
-    if (files?.length === 1) {
-      const data = new FormData();
-      data.set("file", files[0]);
-      console.log(data.file);
-      setIsUploading(true);
-      const response = await fetch("/api/upload", {
-        method: "POST",
-        body: data,
-      });
-      const link = await response.json();
-      setImage(link);
-      setIsUploading(false);
-    }
+async function handleFileChange(ev) {
+  const files = ev?.target.files;
+  if (files?.length === 1) {
+    const data = new FormData();
+    data.set("file", files[0]);
+    console.log(data.file);
+    setIsUploading(true);
+    const response = await fetch("/api/upload", {
+      method: "POST",
+      body: data,
+    });
+    const link = await response.json();
+    setLink(link);
+    setIsUploading(false);
   }
-
+}
   // const userImage = session?.data?.user?.image;
 
   return (
