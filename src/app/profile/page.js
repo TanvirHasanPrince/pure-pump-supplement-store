@@ -1,5 +1,5 @@
 "use client";
-import { redirect } from "next/navigation";
+import { redirect, usePathname } from "next/navigation";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { useEffect, useState } from "react";
@@ -16,7 +16,10 @@ const ProfilePage = () => {
   const [city, setCity] = useState("");
   const [postCode, setPostalCode] = useState("");
   const [country, setCountry] = useState("");
+
   const [isAdmin, setIsAdmin] = useState(false);
+  const [profileFetched, setProfileFetched] = useState(false);
+
   const [isSaving, setIsSaving] = useState(false);
   const [isUploading, setIsUploading] = useState(false);
 
@@ -34,12 +37,13 @@ const ProfilePage = () => {
           setPostalCode(data?.postCode);
           setCountry(data?.country);
           setIsAdmin(data?.admin);
+          setProfileFetched(true);
         });
       });
     }
   }, [session, status]);
 
-  if (status === "loading") {
+  if (status === "loading" || !profileFetched) {
     return "Loading...";
   }
 
