@@ -4,12 +4,12 @@ import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import InfoText from "../components/layout/InfoText";
+import toast from "react-hot-toast";
 
 const ProfilePage = () => {
   const session = useSession();
   const [userName, setUserName] = useState("");
   const [image, setImage] = useState("");
-  const [saved, setSaved] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
   const [isUploading, setIsUploading] = useState(false);
   const { status } = session;
@@ -31,7 +31,6 @@ const ProfilePage = () => {
 
   async function handleProfileInfoUpdate(ev) {
     ev.preventDefault();
-    setSaved(false);
     setIsSaving(true);
     const response = await fetch("/api/profile", {
       method: "PUT",
@@ -40,7 +39,9 @@ const ProfilePage = () => {
     });
     setIsSaving(false);
     if (response.ok) {
-      setSaved(true);
+      toast.success("Profile Saved Successfully!");
+    } else {
+      toast.error("Profile could not be updated");
     }
   }
 
@@ -68,7 +69,7 @@ const ProfilePage = () => {
       <h1 className="text-center text-primary text-4xl font-bold mb-4">
         Profile
       </h1>
-      {saved && <InfoText>Profile Saved!</InfoText>}
+
       {isSaving && <InfoText>Saving...</InfoText>}
       {isUploading && <InfoText>Uploading...</InfoText>}
       <div className="max-w-lg mx-auto">
