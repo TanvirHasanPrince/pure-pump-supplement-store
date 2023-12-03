@@ -44,3 +44,11 @@ button[type="submit"]:disabled,
 .submit:disabled {
   @apply cursor-not-allowed bg-red-400;
 }
+
+div.tabs > * {
+  @apply bg-secondary text-black font-bold rounded-lg py-2 px-4;
+}
+
+div.tabs > *.active {
+  @apply bg-primary text-white font-bold rounded-lg py-2 px-4;
+}

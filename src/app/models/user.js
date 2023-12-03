@@ -11,6 +11,7 @@ const UserSchema = new Schema(
     city: { type: String },
     postCode: { type: String },
     country: { type: String },
+    admin: { type: Boolean, default: false },
   },
   {
     timestamps: true,

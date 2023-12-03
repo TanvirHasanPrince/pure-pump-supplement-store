@@ -5,7 +5,7 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import InfoText from "../components/layout/InfoText";
 import toast from "react-hot-toast";
-import { rejects } from "assert";
+import UserTabs from "../components/layout/UserTabs";
 
 const ProfilePage = () => {
   const session = useSession();
@@ -16,8 +16,10 @@ const ProfilePage = () => {
   const [city, setCity] = useState("");
   const [postCode, setPostalCode] = useState("");
   const [country, setCountry] = useState("");
+  const [isAdmin, setIsAdmin] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
   const [isUploading, setIsUploading] = useState(false);
+
   const { status } = session;
 
   useEffect(() => {
@@ -31,6 +33,7 @@ const ProfilePage = () => {
           setCity(data?.city);
           setPostalCode(data?.postCode);
           setCountry(data?.country);
+          setIsAdmin(data?.admin);
         });
       });
     }
@@ -89,9 +92,7 @@ const ProfilePage = () => {
 
   return (
     <section className="mt-10">
-      <h1 className="text-center text-primary text-4xl font-bold mb-4">
-        Profile
-      </h1>
+      <UserTabs isAdmin={isAdmin}></UserTabs>
 
       {isSaving && <InfoText>Saving...</InfoText>}
       {isUploading && <InfoText>Uploading...</InfoText>}
