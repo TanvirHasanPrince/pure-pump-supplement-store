@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import InfoText from "../components/layout/InfoText";
 
 const ProfilePage = () => {
   const session = useSession();
@@ -10,6 +11,7 @@ const ProfilePage = () => {
   const [image, setImage] = useState("");
   const [saved, setSaved] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
+  const [isUploading, setIsUploading] = useState(false);
   const { status } = session;
 
   useEffect(() => {
@@ -34,7 +36,7 @@ const ProfilePage = () => {
     const response = await fetch("/api/profile", {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name: userName, image}),
+      body: JSON.stringify({ name: userName, image }),
     });
     setIsSaving(false);
     if (response.ok) {
@@ -48,13 +50,14 @@ const ProfilePage = () => {
       const data = new FormData();
       data.set("file", files[0]);
       console.log(data.file);
-
+      setIsUploading(true);
       const response = await fetch("/api/upload", {
         method: "POST",
         body: data,
       });
       const link = await response.json();
       setImage(link);
+      setIsUploading(false);
     }
   }
 
@@ -65,13 +68,9 @@ const ProfilePage = () => {
       <h1 className="text-center text-primary text-4xl font-bold mb-4">
         Profile
       </h1>
-      {saved && (
-        <h2 className="text-center text-primary font-bold">Profile saved</h2>
-      )}
-      {isSaving && (
-        <h2 className="text-center text-primary font-bold">Saving....</h2>
-      )}
-
+      {saved && <InfoText>Profile Saved!</InfoText>}
+      {isSaving && <InfoText>Saving...</InfoText>}
+      {isUploading && <InfoText>Uploading...</InfoText>}
       <div className="max-w-lg mx-auto">
         <div className="flex gap-4 items-center">
           <div>
