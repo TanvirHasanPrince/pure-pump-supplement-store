@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import InfoText from "../components/layout/InfoText";
 import toast from "react-hot-toast";
+import { rejects } from "assert";
 
 const ProfilePage = () => {
   const session = useSession();
@@ -117,3 +118,25 @@ const ProfilePage = () => {
 };
 
 export default ProfilePage;
+
+
+
+// Another way to use the react hot toast---- with promise
+// const savingPromise = new Promise(asynch(resolve, reject)=> {
+//   const response = await fetch('/api/profile', {
+//     method: "PUT",
+//     headers: {'Content-Type': 'application/json'},
+//     body: JSON.stringify({name: userName, image})
+//   }),
+//   if(response.ok){
+//     resolve()
+//   } else {
+//     reject()
+//   }
+// })
+
+// await toast.promise(savingPromise, {
+//   loading: 'Saving...',
+//   success: 'Profile saved!',
+//   error: 'Error'
+// })
