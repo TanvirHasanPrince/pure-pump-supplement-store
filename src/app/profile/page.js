@@ -16,7 +16,7 @@ const ProfilePage = () => {
   }, [session, status]);
 
   if (status === "loading") {
-    return "Loading...";
+    return "Loading..."
   }
 
   if (status === "unauthenticated") {
