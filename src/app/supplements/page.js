@@ -24,6 +24,7 @@ const SupplementsPage = () => {
   async function handleFormSubmit(ev) {
     ev.preventDefault();
     const data = { image, name, description, basePrice };
+    console.log(image, name, description, basePrice);
     const savingPromise = new Promise(async (resolve, reject) => {
       const response = await fetch("/api/supplement-items", {
         method: "POST",

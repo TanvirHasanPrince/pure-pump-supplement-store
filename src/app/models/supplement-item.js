@@ -1,4 +1,4 @@
-import { Schema, models } from "mongoose";
+import { model, Schema, models } from "mongoose";
 
 const SupplementItemSchema = new Schema(
   {
