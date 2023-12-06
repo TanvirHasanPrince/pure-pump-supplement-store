@@ -2,13 +2,23 @@
 import UserTabs from "../components/layout/UserTabs";
 import useProfile from "../components/useProfile";
 import EditableImage from "../components/layout/EditableImage";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import Link from "next/link";
 import RightArrow from "../components/icons/RightArrow";
+import Image from "next/image";
 
 const SupplementsPage = () => {
+  const [supplementItems, setSupplementItems] = useState([]);
   const { loading: profileLoading, data: profileData } = useProfile();
+
+  useEffect(() => {
+    fetch("/api/supplement-items").then((res) => {
+      res.json().then((supplementItems) => {
+        setSupplementItems(supplementItems);
+      });
+    });
+  }, []);
 
   if (profileLoading) {
     return "loading supplements....";
@@ -28,6 +38,32 @@ const SupplementsPage = () => {
         >
           Create New Supplement Items <RightArrow />
         </Link>
+      </div>
+      <div>
+        <h2 className="text-primary font-bold text-lg my-4">
+          Edit Supplement Item
+        </h2>
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 grid-cols-1 gap-3">
+          {supplementItems.length > 0 &&
+            supplementItems.map((item) => (
+              <Link
+                href={"/supplements/edit/" + item._id}
+                className=" flex flex-col items-center rounded-lg text-center  hover:shadow-lg hover:shadow-primary/20 transition-all border px-1"
+                key={item._id}
+              >
+                <div className="relative">
+                  <Image
+                  className="my-4 rounded-md"
+                    src={item.image}
+                    alt=""
+                    width={200}
+                    height={200}
+                  ></Image>
+                </div>
+                <div className="text-center">{item.name}</div>
+              </Link>
+            ))}
+        </div>
       </div>
     </section>
   );

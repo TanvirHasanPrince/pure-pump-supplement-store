@@ -8,3 +8,9 @@ export async function POST(req) {
 
   return Response.json(supplementItemDocument);
 }
+
+
+export async function GET() {
+  mongoose.connect(process.env.MONGO_URL);
+  return Response.json(await SupplementItem.find());
+}
