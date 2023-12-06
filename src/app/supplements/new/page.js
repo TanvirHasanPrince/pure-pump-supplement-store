@@ -4,13 +4,16 @@ import UserTabs from "../../components/layout/UserTabs";
 import { useState } from "react";
 import EditableImage from "../../components/layout/EditableImage";
 import Link from "next/link";
-import RightArrow from "@/app/components/icons/RightArrow";
+import LeftArrow from "@/app/components/icons/LeftArrow";
+import { redirect } from "next/dist/server/api-utils";
+import toast from "react-hot-toast";
 
 const NewSupplementPage = () => {
   const [image, setImage] = useState("");
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [basePrice, setIbasePrice] = useState("");
+  const [redirectToSupplements, setRedirectToSupplements] = useState(false);
 
   const { loading: profileLoading, data: profileData } = useProfile();
 
@@ -42,6 +45,12 @@ const NewSupplementPage = () => {
       success: "Saved!",
       error: "Something happended!",
     });
+
+    setRedirectToSupplements(true);
+
+    if (redirectToSupplements) {
+      return redirect("/supplements");
+    }
   }
 
   return (
@@ -52,7 +61,7 @@ const NewSupplementPage = () => {
           className="bg-primary flex text-center justify-center items-center gap-2 text-white px-4 py-2 rounded-lg uppercase text-sm font-semibold"
           href={"/supplements"}
         >
-          Show All Supplements <RightArrow />
+          Show All Supplements <LeftArrow></LeftArrow>
         </Link>
       </div>
       <form onSubmit={handleFormSubmit} className="mt-8 max-w-lg mx-auto">

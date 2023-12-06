@@ -21,7 +21,8 @@ const UserTabs = ({ isAdmin }) => {
           </Link>
           <Link
             href={"/supplements"}
-            className={path === "/supplements" ? "active" : ""}
+            className={/supplements/.test(path) ? "active" : ""}
+            // className={path.includes("supplements") ? "active" : ""}-- Another method
           >
             Supplements
           </Link>
