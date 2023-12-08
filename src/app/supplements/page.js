@@ -53,7 +53,7 @@ const SupplementsPage = () => {
               >
                 <div className="relative">
                   <Image
-                  className="my-4 rounded-md"
+                    className="my-4 rounded-md"
                     src={item.image}
                     alt=""
                     width={200}
