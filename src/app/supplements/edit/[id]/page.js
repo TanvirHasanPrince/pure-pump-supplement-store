@@ -8,9 +8,11 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { useParams } from "next/navigation";
 import toast from "react-hot-toast";
+import StoreItemForm from "../../../components/layout/StoreItemForm";
 
 const EditSupplementItemPage = () => {
   const { id } = useParams();
+    const [supplementItem, setSupplementItem] = useState(null);
   const [image, setImage] = useState("");
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
@@ -29,10 +31,7 @@ const EditSupplementItemPage = () => {
       })
       .then((items) => {
         const item = items.find((i) => i._id === id);
-        setImage(item.image);
-        setDescription(item.description);
-        setName(item.name);
-        setIbasePrice(item.basePrice);
+       setSupplementItem(item);
       })
       .catch((error) => {
         console.error("Error fetching data:", error);
@@ -86,37 +85,11 @@ const EditSupplementItemPage = () => {
           Show All Supplements <LeftArrow></LeftArrow>
         </Link>
       </div>
-      <form onSubmit={handleFormSubmit} className="mt-8 max-w-lg mx-auto">
-        <div
-          className="grid items-start gap-2"
-          style={{ gridTemplateColumns: ".3fr .7fr" }}
-        >
-          <div className="">
-            <EditableImage link={image} setLink={setImage}></EditableImage>
-          </div>
-          <div className="grow">
-            <label>Supplement Name</label>
-            <input
-              type="text"
-              value={name}
-              onChange={(ev) => setName(ev.target.value)}
-            />
-            <label>Description</label>
-            <input
-              type="text"
-              value={description}
-              onChange={(ev) => setDescription(ev.target.value)}
-            />
-            <label>Base Price</label>
-            <input
-              type="text"
-              value={basePrice}
-              onChange={(ev) => setIbasePrice(ev.target.value)}
-            />
-            <button type="submit">Save</button>
-          </div>
-        </div>
-      </form>
+      <StoreItemForm
+        onSubmit={handleFormSubmit}
+        storeItem={supplementItem}
+        className="mt-8 max-w-lg mx-auto"
+      ></StoreItemForm>
     </section>
   );
 };
