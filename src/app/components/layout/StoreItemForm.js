@@ -7,6 +7,7 @@ const StoreItemForm = ({ onSubmit, storeItem }) => {
   const [name, setName] = useState(storeItem?.name || "");
   const [description, setDescription] = useState(storeItem?.description || "");
   const [basePrice, setIBasePrice] = useState(storeItem?.basePrice || "");
+  const [sizes, setSizes] = useState([]);
 
   return (
     <form
@@ -46,7 +47,12 @@ const StoreItemForm = ({ onSubmit, storeItem }) => {
             value={basePrice}
             onChange={(ev) => setIBasePrice(ev.target.value)}
           />
-          <StoreItemPriceProps></StoreItemPriceProps>
+          <StoreItemPriceProps
+            name={"Sizes"}
+            addLabel ={'Add Supplement Size'}
+            props={sizes}
+            setProps={setSizes}
+          ></StoreItemPriceProps>
           <button type="submit">Save</button>
         </div>
       </div>

@@ -1,40 +1,38 @@
 import { useState } from "react";
 import TrashIcon from "../../components/icons/TrashIcon";
 
-const StoreItemPriceProps = () => {
-  const [sizes, setSizes] = useState([]);
-
-  function addSize() {
-    setSizes((oldSizes) => {
-      return [...oldSizes, { name: "", price: 0 }];
+const StoreItemPriceProps = ({ name, props, setProps, addLabel }) => {
+  function addProp() {
+    setProps((oldProps) => {
+      return [...oldProps, { name: "", price: 0 }];
     });
   }
 
-  function editSize(ev, index, prop) {
+  function editProp(ev, index, prop) {
     const newValue = ev.target.value;
-    setSizes((prevSizes) => {
+    setProps((prevSizes) => {
       const newSizes = [...prevSizes];
       newSizes[index][prop] = newValue;
       return newSizes;
     });
   }
 
-  function removeSize(indexToRemove) {
-    setSizes((prev) => prev.filter((v, i) => i !== indexToRemove));
+  function removeProp(indexToRemove) {
+    setProps((prev) => prev.filter((v, i) => i !== indexToRemove));
   }
   return (
     <div className="bg-gray-200 p-2 rounded-md mb-2">
       <label>Sizes</label>
-      {sizes.length > 0 &&
-        sizes.map((size, index) => (
+      {props.length > 0 &&
+        props.map((size, index) => (
           <div className="flex items-end gap-2" key={index}>
             <div>
-              <labe>Size Name</labe>
+              <labe>{name}</labe>
               <input
                 type="text"
                 placeholder="Size Name"
                 value={size?.name}
-                onChange={(ev) => editSize(ev, index, "name")}
+                onChange={(ev) => editProp(ev, index, "name")}
               />
             </div>
             <div>
@@ -43,14 +41,14 @@ const StoreItemPriceProps = () => {
                 type="text"
                 placeholder="Extra Price"
                 value={size?.price}
-                onChange={(ev) => editSize(ev, index, "price")}
+                onChange={(ev) => editProp(ev, index, "price")}
               />
             </div>
             <div>
               <button
                 type="button"
                 className="bg-white p-2 mb-2 rounded-lg font-bold text-black w-full"
-                onClick={() => removeSize(index)}
+                onClick={() => removeProp(index)}
               >
                 <TrashIcon></TrashIcon>
               </button>
@@ -60,10 +58,10 @@ const StoreItemPriceProps = () => {
 
       <button
         type="button"
-        onClick={addSize}
+        onClick={addProp}
         className="bg-white p-2 rounded-lg font-bold text-black w-full "
       >
-        <span>Add Size</span>
+        <span>{addLabel}</span>
       </button>
     </div>
   );
