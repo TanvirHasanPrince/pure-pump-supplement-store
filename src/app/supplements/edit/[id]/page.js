@@ -1,6 +1,5 @@
 "use client";
 import UserTabs from "../../../components/layout/UserTabs";
-import EditableImage from "../../../components/layout/EditableImage";
 import Link from "next/link";
 import LeftArrow from "@/app/components/icons/LeftArrow";
 import useProfile from "../../../components/useProfile";
@@ -14,6 +13,7 @@ const EditSupplementItemPage = () => {
   const { id } = useParams();
   const [supplementItem, setSupplementItem] = useState(null);
   const [redirectToSupplements, setRedirectToSupplements] = useState(false);
+
 
   const { loading: profileLoading, data: profileData } = useProfile();
 

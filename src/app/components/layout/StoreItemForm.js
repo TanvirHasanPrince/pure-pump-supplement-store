@@ -7,8 +7,8 @@ const StoreItemForm = ({ onSubmit, storeItem }) => {
   const [name, setName] = useState(storeItem?.name || "");
   const [description, setDescription] = useState(storeItem?.description || "");
   const [basePrice, setIBasePrice] = useState(storeItem?.basePrice || "");
-  const [sizes, setSizes] = useState([]);
-  const [flavour, setFlavour] = useState([]);
+  const [sizes, setSizes] = useState(storeItem?.sizes || []);
+  const [flavour, setFlavour] = useState(storeItem?.flavour || []);
 
   return (
     <form
