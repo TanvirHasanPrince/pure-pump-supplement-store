@@ -1,5 +1,6 @@
 import EditableImage from "./EditableImage";
 import { useState } from "react";
+import TrashIcon from "../../components/icons/TrashIcon";
 
 const StoreItemForm = ({ onSubmit, storeItem }) => {
   const [image, setImage] = useState(storeItem?.image || "");
@@ -94,7 +95,7 @@ const StoreItemForm = ({ onSubmit, storeItem }) => {
                       className="bg-white p-2 mb-2  font-bold text-black w-full"
                       onClick={() => removeSize(index)}
                     >
-                      X
+                      <TrashIcon></TrashIcon>
                     </button>
                   </div>
                 </div>
