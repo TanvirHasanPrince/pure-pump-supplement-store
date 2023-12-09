@@ -52,6 +52,24 @@ const CategoriesPage = () => {
     return "Not an idmin";
   }
 
+  async function handleDeleteClick(_id) {
+    const promise = new Promise(async (resolve, reject) => {
+      const response = await fetch("/api/categories?_id=" + _id, {
+        method: "DELETE",
+      });
+      fetchCategories();
+      if (response.ok) {
+        resolve();
+      } else reject();
+    });
+
+    toast.promise(promise, {
+      loading: "Deleting..",
+      success: "Deleted",
+      error: "Error",
+    });
+  }
+
   return (
     <section className="mt-8 max-w-lg mx-auto">
       <UserTabs isAdmin={true}></UserTabs>
@@ -82,19 +100,34 @@ const CategoriesPage = () => {
       </form>
       <div>
         <h2 className="mt-8 text-primary font-bold text-center uppercase">
-          Edit Category
+          Existing Categories
         </h2>
         {categories?.length > 0 &&
           categories.map((c) => (
             <div
-              onClick={() => {
-                setEditedCateory(c);
-                setCategoryName(c.name);
-              }}
-              className="bg-gray-200 rounded-lg p-2 px-4 flex gap-1 cursor-pointer mb-4"
+              className="bg-gray-200 rounded-lg p-2 px-4 flex gap-1  mb-4"
               key={c._id}
             >
-              <span> {c.name}</span>
+              <div className="grow"> {c.name}</div>
+              <div className="flex gap-1">
+                <button
+                  onClick={() => {
+                    setEditedCateory(c);
+                    setCategoryName(c.name);
+                  }}
+                  type="button"
+                  className="bg-secondary font-bold uppercase p-2 mx-2 rounded-lg"
+                >
+                  Edit
+                </button>
+                <button
+                  onClick={() => handleDeleteClick(c._id)}
+                  type="button"
+                  className="bg-primary font-bold uppercase p-2 rounded-lg text-white"
+                >
+                  Delete
+                </button>
+              </div>
             </div>
           ))}
       </div>
