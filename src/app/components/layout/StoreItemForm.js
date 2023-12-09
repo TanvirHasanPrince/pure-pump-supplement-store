@@ -8,6 +8,7 @@ const StoreItemForm = ({ onSubmit, storeItem }) => {
   const [description, setDescription] = useState(storeItem?.description || "");
   const [basePrice, setIBasePrice] = useState(storeItem?.basePrice || "");
   const [sizes, setSizes] = useState([]);
+  const [flavour, setFlavour] = useState([]);
 
   return (
     <form
@@ -17,6 +18,8 @@ const StoreItemForm = ({ onSubmit, storeItem }) => {
           name,
           description,
           basePrice,
+          sizes,
+          flavour,
         })
       }
       className="mt-8 max-w-lg mx-auto"
@@ -49,9 +52,15 @@ const StoreItemForm = ({ onSubmit, storeItem }) => {
           />
           <StoreItemPriceProps
             name={"Sizes"}
-            addLabel ={'Add Supplement Size'}
+            addLabel={"Add Supplement Size"}
             props={sizes}
             setProps={setSizes}
+          ></StoreItemPriceProps>
+          <StoreItemPriceProps
+            name={"Flavour"}
+            addLabel={"Add Flavour"}
+            props={flavour}
+            setProps={setFlavour}
           ></StoreItemPriceProps>
           <button type="submit">Save</button>
         </div>
