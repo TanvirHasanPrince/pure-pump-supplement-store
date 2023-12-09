@@ -12,11 +12,7 @@ import StoreItemForm from "../../../components/layout/StoreItemForm";
 
 const EditSupplementItemPage = () => {
   const { id } = useParams();
-    const [supplementItem, setSupplementItem] = useState(null);
-  const [image, setImage] = useState("");
-  const [name, setName] = useState("");
-  const [description, setDescription] = useState("");
-  const [basePrice, setIbasePrice] = useState("");
+  const [supplementItem, setSupplementItem] = useState(null);
   const [redirectToSupplements, setRedirectToSupplements] = useState(false);
 
   const { loading: profileLoading, data: profileData } = useProfile();
@@ -31,7 +27,7 @@ const EditSupplementItemPage = () => {
       })
       .then((items) => {
         const item = items.find((i) => i._id === id);
-       setSupplementItem(item);
+        setSupplementItem(item);
       })
       .catch((error) => {
         console.error("Error fetching data:", error);
@@ -46,9 +42,9 @@ const EditSupplementItemPage = () => {
     return "Not an idmin";
   }
 
-  async function handleFormSubmit(ev) {
+  async function handleFormSubmit(ev, data) {
     ev.preventDefault();
-    const data = { image, name, description, basePrice, _id: id };
+    data = { ...data, _id: id };
 
     const savingPromise = new Promise(async (resolve, reject) => {
       const response = await fetch("/api/supplement-items", {
