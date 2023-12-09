@@ -90,10 +90,20 @@ const CategoriesPage = () => {
               onChange={(ev) => setCategoryName(ev.target.value)}
             />
           </div>
-          <div className="pb-2">
+          <div className="pb-2 flex gap-2 ">
             {" "}
-            <button type="submit" className="">
+            <button type="submit" className="uppercase ">
               {editedCategory ? "Update" : "Create"}
+            </button>{" "}
+            <button
+              type="button"
+              onClick={() => {
+                setEditedCateory(null);
+                setCategoryName("");
+              }}
+              className=" bg-secondary font-bold uppercase p-2 rounded-lg text-black"
+            >
+              Cancel
             </button>{" "}
           </div>
         </div>
@@ -105,7 +115,7 @@ const CategoriesPage = () => {
         {categories?.length > 0 &&
           categories.map((c) => (
             <div
-              className="bg-gray-200 rounded-lg p-2 px-4 flex gap-1  mb-4"
+              className="bg-gray-200 rounded-lg p-2 px-4 flex gap-1 items-center mb-4"
               key={c._id}
             >
               <div className="grow"> {c.name}</div>
