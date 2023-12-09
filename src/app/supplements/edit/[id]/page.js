@@ -14,7 +14,6 @@ const EditSupplementItemPage = () => {
   const [supplementItem, setSupplementItem] = useState(null);
   const [redirectToSupplements, setRedirectToSupplements] = useState(false);
 
-
   const { loading: profileLoading, data: profileData } = useProfile();
 
   useEffect(() => {
@@ -70,6 +69,26 @@ const EditSupplementItemPage = () => {
     }
   }
 
+  async function handleDeleteClick() {
+    const promise = new Promise(async (resolve, reject) => {
+      const response = await fetch("/api/supplement-items?_id=" + id, {
+        method: "DELETE",
+      });
+
+      if (response.ok) {
+        resolve();
+      } else reject();
+    });
+
+    toast.promise(promise, {
+      loading: "Deleting..",
+      success: "Deleted",
+      error: "Error",
+    });
+
+    setRedirectToSupplements(true);
+  }
+
   return (
     <section className="mt-8">
       <UserTabs isAdmin={true}></UserTabs>
@@ -86,6 +105,14 @@ const EditSupplementItemPage = () => {
         storeItem={supplementItem}
         className="mt-8 max-w-lg mx-auto"
       ></StoreItemForm>
+      <div className="max-w-lg mx-auto mt-4 pl-[10rem] flex justify-center">
+        <button
+          onClick={() => handleDeleteClick()}
+          className="bg-primary font-bold uppercase p-2 rounded-lg text-white text-center"
+        >
+          Delete This Supplement Item
+        </button>
+      </div>
     </section>
   );
 };
