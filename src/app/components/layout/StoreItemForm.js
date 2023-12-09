@@ -23,8 +23,8 @@ const StoreItemForm = ({ onSubmit, storeItem }) => {
     });
   }
 
-  function removeSize(index) {
-    setSizes(prev => prev.filter((v,i)=> i !== index))
+  function removeSize(indexToRemove) {
+    setSizes((prev) => prev.filter((v, i) => i !== indexToRemove));
   }
 
   return (
