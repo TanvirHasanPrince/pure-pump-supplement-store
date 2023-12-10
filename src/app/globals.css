@@ -6,7 +6,7 @@ section.hero {
   @apply grid;
   grid-template-columns: 0.4fr 0.6fr;
 }
-
+select,
 input[type="email"],
 input[type="password"],
 input[type="tel"],
@@ -36,6 +36,7 @@ input[type="text"]:disabled {
 } */
 
 button[type="submit"],
+button.primary,
 .submit {
   @apply block w-full font-bold rounded-lg px-6 py-2 border-0 bg-primary text-white;
 }

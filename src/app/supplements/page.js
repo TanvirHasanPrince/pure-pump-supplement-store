@@ -1,9 +1,7 @@
 "use client";
 import UserTabs from "../components/layout/UserTabs";
 import useProfile from "../components/useProfile";
-import EditableImage from "../components/layout/EditableImage";
 import { useEffect, useState } from "react";
-import toast from "react-hot-toast";
 import Link from "next/link";
 import RightArrow from "../components/icons/RightArrow";
 import Image from "next/image";

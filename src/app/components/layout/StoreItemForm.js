@@ -1,14 +1,24 @@
 import EditableImage from "./EditableImage";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import StoreItemPriceProps from "../../components/layout/StoreItemProps";
 
 const StoreItemForm = ({ onSubmit, storeItem }) => {
   const [image, setImage] = useState(storeItem?.image || "");
   const [name, setName] = useState(storeItem?.name || "");
   const [description, setDescription] = useState(storeItem?.description || "");
+  const [category, setCategory] = useState(storeItem?.category || "");
+  const [categories, setCategories] = useState([]);
   const [basePrice, setIBasePrice] = useState(storeItem?.basePrice || "");
   const [sizes, setSizes] = useState(storeItem?.sizes || []);
   const [flavour, setFlavour] = useState(storeItem?.flavour || []);
+
+  useEffect(() => {
+    fetch("/api/categories").then((res) => {
+      res.json().then((categories) => {
+        setCategories(categories);
+      });
+    });
+  }, []);
 
   return (
     <form
@@ -17,6 +27,7 @@ const StoreItemForm = ({ onSubmit, storeItem }) => {
           image,
           name,
           description,
+          category,
           basePrice,
           sizes,
           flavour,
@@ -44,6 +55,18 @@ const StoreItemForm = ({ onSubmit, storeItem }) => {
             value={description}
             onChange={(ev) => setDescription(ev.target.value)}
           />
+          <label>Category</label>
+          <select
+            value={category}
+            onChange={(ev) => setCategory(ev.target.value)}
+          >
+            {categories?.length > 0 &&
+              categories.map((c, _id) => (
+                <option key={_id} value={c._id}>
+                  {c.name}
+                </option>
+              ))}
+          </select>
           <label>Base Price</label>
           <input
             type="text"
