@@ -26,14 +26,12 @@ const UserTabs = ({ isAdmin }) => {
           >
             Supplements
           </Link>
-          <Link
-            href={"/accessories"}
-            className={path === "/accessories" ? "active" : ""}
-          >
-            Accessories
-          </Link>
+
           <Link href={"/users"} className={path === "/users" ? "active" : ""}>
             Users
+          </Link>
+          <Link href={"/orders"} className={path === "/orders" ? "active" : ""}>
+            Orders
           </Link>
         </>
       )}
