@@ -87,6 +87,10 @@ const EditSupplementItemPage = () => {
     });
 
     setRedirectToSupplements(true);
+
+    if (redirectToSupplements) {
+      return redirect("/supplements");
+    }
   }
 
   return (
