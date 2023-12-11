@@ -32,7 +32,7 @@ export default function EditableImage({ link, setLink }) {
     <>
       {" "}
       <div>
-        <div className="relative p-2 rounded-lg max-w-[120px]">
+        <div className=" rounded-lg max-w-[120px]">
           {link && (
             <Image
               className="rounded-lg w-full h-full mb-4"
