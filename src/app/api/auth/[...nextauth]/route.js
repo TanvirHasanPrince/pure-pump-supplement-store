@@ -1,6 +1,6 @@
 import CredentialsProvider from "next-auth/providers/credentials";
 import NextAuth from "next-auth";
-import mongoose from "mongoose";
+import * as mongoose from "mongoose";
 import { User } from "../../../models/user";
 import bcrypt from "bcrypt";
 import GoogleProvider from "next-auth/providers/google";
@@ -21,7 +21,7 @@ export const authOptions = {
       credentials: {
         username: {
           label: "Email",
-          type: "text",
+          type: "email",
           placeholder: "test@example.com",
         },
         password: { label: "Password", type: "password" },
@@ -37,11 +37,13 @@ export const authOptions = {
         if (passwordOk) {
           return user;
         }
+
         return null;
       },
     }),
   ],
 };
+
 
 const handler = NextAuth(authOptions);
 
