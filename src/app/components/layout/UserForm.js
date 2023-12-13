@@ -31,7 +31,7 @@ const UserForm = ({ user, onSave }) => {
               city,
               postCode,
               country,
-              admin
+              admin,
             })
           }
         >

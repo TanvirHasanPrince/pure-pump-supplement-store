@@ -61,8 +61,8 @@ const StoreItemForm = ({ onSubmit, storeItem }) => {
             onChange={(ev) => setCategory(ev.target.value)}
           >
             {categories?.length > 0 &&
-              categories.map((c, _id) => (
-                <option key={_id} value={c._id}>
+              categories.map((c) => (
+                <option key={c._id} value={c._id}>
                   {c.name}
                 </option>
               ))}
