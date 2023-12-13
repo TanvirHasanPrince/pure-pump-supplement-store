@@ -3,7 +3,6 @@ import { useState } from "react";
 import EditableImage from "./EditableImage";
 import useProfile from "../useProfile";
 
-
 const UserForm = ({ user, onSave }) => {
   const [userName, setUserName] = useState(user?.name || "");
   const [image, setImage] = useState(user?.image || "");
@@ -14,7 +13,6 @@ const UserForm = ({ user, onSave }) => {
   const [country, setCountry] = useState(user?.country || "");
   const [admin, setAdmin] = useState(user?.admin || "");
   const { data: loggedInUserData } = useProfile();
-
 
   return (
     <div className="flex gap-4">
@@ -33,6 +31,7 @@ const UserForm = ({ user, onSave }) => {
               city,
               postCode,
               country,
+              admin
             })
           }
         >
@@ -94,7 +93,7 @@ const UserForm = ({ user, onSave }) => {
             value={country}
             onChange={(ev) => setCountry(ev.target.value)}
           />
-       
+
           {loggedInUserData && (
             <div>
               <label

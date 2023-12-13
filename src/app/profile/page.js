@@ -11,8 +11,7 @@ import UserForm from "../components/layout/UserForm";
 const ProfilePage = () => {
   const session = useSession();
 
-  const[user, setUser] = useState(null)
- 
+  const [user, setUser] = useState(null);
 
   const [isAdmin, setIsAdmin] = useState(false);
   const [profileFetched, setProfileFetched] = useState(false);
@@ -26,7 +25,7 @@ const ProfilePage = () => {
     if (status === "authenticated") {
       fetch("/api/profile").then((response) => {
         response.json().then((data) => {
-          setUser(data)
+          setUser(data);
           setIsAdmin(data?.admin);
           setProfileFetched(true);
         });
@@ -58,22 +57,22 @@ const ProfilePage = () => {
     }
   }
 
-async function handleFileChange(ev) {
-  const files = ev?.target.files;
-  if (files?.length === 1) {
-    const data = new FormData();
-    data.set("file", files[0]);
-    console.log(data.file);
-    setIsUploading(true);
-    const response = await fetch("/api/upload", {
-      method: "POST",
-      body: data,
-    });
-    const link = await response.json();
-    setLink(link);
-    setIsUploading(false);
+  async function handleFileChange(ev) {
+    const files = ev?.target.files;
+    if (files?.length === 1) {
+      const data = new FormData();
+      data.set("file", files[0]);
+      console.log(data.file);
+      setIsUploading(true);
+      const response = await fetch("/api/upload", {
+        method: "POST",
+        body: data,
+      });
+      const link = await response.json();
+      setLink(link);
+      setIsUploading(false);
+    }
   }
-}
   // const userImage = session?.data?.user?.image;
 
   return (
@@ -88,7 +87,6 @@ async function handleFileChange(ev) {
     </section>
   );
 };
-
 
 export default ProfilePage;
 

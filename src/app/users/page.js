@@ -4,13 +4,12 @@ import UserTabs from "../components/layout/UserTabs";
 import useProfile from "../components/useProfile";
 import Link from "next/link";
 
-
 const UserPage = () => {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
     fetch("/api/users").then((response) =>
-      response.json().then((users) =>  {
+      response.json().then((users) => {
         setUsers(users);
       })
     );
@@ -52,7 +51,7 @@ const UserPage = () => {
                   href={"users/" + user._id}
                   className="bg-secondary uppercase text-black px-8 py-2 rounded-md font-bold"
                 >
-           Edit
+                  Edit
                 </Link>
               </div>
             </div>

@@ -4,6 +4,7 @@ import UserTabs from "../../components/layout/UserTabs";
 import UserForm from "../../components/layout/UserForm";
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
+import toast from "react-hot-toast";
 
 const EditUserPage = () => {
   const { loading: profileLoading, data: profileData } = useProfile();
@@ -18,13 +19,23 @@ const EditUserPage = () => {
     });
   }, []);
 
-  function handleSaveButtonClick(ev, data) {
+  async function handleSaveButtonClick(ev, data) {
     ev.preventDefault();
+    const promise = new Promise(async (resolve, reject) => {
+      const response = await fetch("/api/profile", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...data, _id: id }),
+      });
+      if (response.ok) {
+        resolve();
+      } else reject();
+    });
 
-    fetch("/api/profile", {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ ...data, _id: id }),
+    await toast.promise(promise, {
+      loading: "Saving user..",
+      success: "User Saved",
+      error: "An error has occured while saving the user",
     });
   }
 
