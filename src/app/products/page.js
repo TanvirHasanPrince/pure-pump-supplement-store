@@ -9,13 +9,17 @@ const SupplementPage = () => {
   const [supplementItems, setSupplementItems] = useState([]);
 
   useEffect(() => {
-    fetch("/api/categories").then((res) => {
-      res.json().then((categories) => setCatgories(categories));
-    });
-    fetch("/api/supplement-items").then((res) => {
-      res.json().then((supplementItems) => setSupplementItems(supplementItems));
-    });
-  });
+    const fetchData = async () => {
+      const categoriesResponse = await fetch("/api/categories");
+      const supplementItemsResponse = await fetch("/api/supplement-items");
+
+      setCatgories(await categoriesResponse.json());
+      setSupplementItems(await supplementItemsResponse.json());
+    };
+
+    fetchData();
+  }, []);
+
   return (
     <section className="mt-8">
       {categories.length > 0 &&
