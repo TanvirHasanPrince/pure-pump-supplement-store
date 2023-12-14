@@ -10,6 +10,14 @@ const nextConfig = {
         protocol: "https",
         hostname: "*pure-pump.s3.amazonaws.com",
       },
+      {
+        protocol: "https",
+        hostname: "*m.media-amazon.com",
+      },
+      {
+        protocol: "https",
+        hostname: "*i.ibb.co",
+      },
     ],
   },
 };
