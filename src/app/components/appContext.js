@@ -15,6 +15,21 @@ const AppProvider = ({ children }) => {
     }
   }
 
+  function removeCartProducts(indexToRemove) {
+    setCartProducts((previousCartProducts) => {
+      const newCartProducts = previousCartProducts.filter(
+        (v, index) => index !== indexToRemove
+      );
+      saveCartProductsToLocalStorage(newCartProducts);
+      return newCartProducts;
+    });
+  }
+
+  function clearCart() {
+    setCartProducts([]);
+    saveCartProductsToLocalStorage([]);
+  }
+
   useEffect(() => {
     if (localStorage && localStorage.getItem("cart")) {
       setCartProducts(JSON.parse(localStorage.getItem("cart")));
@@ -38,6 +53,8 @@ const AppProvider = ({ children }) => {
             cartProducts,
             setCartProducts,
             addToCart,
+            removeCartProducts,
+            clearCart,
           }}
         >
           {children}
