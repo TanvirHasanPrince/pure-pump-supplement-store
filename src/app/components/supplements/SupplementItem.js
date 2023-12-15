@@ -8,24 +8,45 @@ import Image from "next/image";
 const SupplementItem = (supplementItem) => {
   const { image, name, description, basePrice, sizes, category, flavour } =
     supplementItem;
-  const [showPopup, setShowPopus] = useState(false);
+  const [selectedSize, setSelectedSize] = useState(sizes?.[0] || null);
+  const [selectedFlavour, setSelectedFlavour] = useState(null);
+
+  const [showPopup, setShowPopup] = useState(false);
 
   const { addToCart } = useContext(CartContext);
 
   function handleAddToCartButtonClick() {
+    if (showPopup) {
+      addToCart(supplementItem, selectedSize, selectedFlavour);
+
+      toast.success("Added to cart!");
+      setShowPopup(false);
+      return;
+    }
     if (sizes.length === 0 && flavour.length === 0) {
       addToCart(supplementItem);
       toast.success("Added to cart!");
     } else {
-      setShowPopus(true);
+      setShowPopup(true);
     }
+  }
+
+  let selectedPrice = basePrice;
+  if (selectedSize) {
+    selectedPrice += selectedSize.price;
   }
 
   return (
     <>
       {showPopup && (
-        <div className=" fixed inset-0 bg-black/80 flex items-center justify-center">
-          <div className="my-8 bg-white p-2 rounded-lg max-w-md">
+        <div
+          onClick={() => setShowPopup(false)}
+          className=" fixed inset-0 bg-black/80 flex items-center justify-center"
+        >
+          <div
+            onClick={(ev) => ev.stopPropagation()}
+            className="my-8 bg-white p-2 rounded-lg max-w-md"
+          >
             <div
               className="overflow-y-scroll p-2"
               style={{ maxHeight: "calc(100vh - 100px)" }}
@@ -50,8 +71,13 @@ const SupplementItem = (supplementItem) => {
                       className="flex items-center gap-2 p-4 rounded-md mb-1 border"
                       key={i}
                     >
-                      <input type="radio" name={size.name} /> {size.name} BDT{" "}
-                      {basePrice + size.price}
+                      <input
+                        checked={selectedSize?.name === size.name}
+                        type="radio"
+                        name={size.name}
+                        onClick={() => setSelectedSize(size)}
+                      />{" "}
+                      {size.name} BDT {basePrice + size.price}
                     </label>
                   ))}
                 </div>
@@ -67,15 +93,24 @@ const SupplementItem = (supplementItem) => {
                       className="flex items-center gap-2 p-4 rounded-md mb-1 border"
                       key={i}
                     >
-                      <input type="radio" name={flavor.name} /> {flavor.name}{" "}
-                      BDT {flavor.price}
+                      <input
+                        checked={selectedFlavour?.name === flavor.name}
+                        type="radio"
+                        name={flavor.name}
+                        onClick={() => setSelectedFlavour(flavor)}
+                      />{" "}
+                      {flavor.name}
                     </label>
                   ))}
                 </div>
               )}
-              <button className="primary" type="button">
+              <button
+                onClick={handleAddToCartButtonClick}
+                className="primary sticky bottom-2"
+                type="button"
+              >
                 {" "}
-                Add to cart selected price{" "}
+                Add to cart BDT {selectedPrice}
               </button>
             </div>
           </div>
