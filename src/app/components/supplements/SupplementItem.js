@@ -10,13 +10,13 @@ const SupplementItem = (supplementItem) => {
     supplementItem;
   const [selectedSize, setSelectedSize] = useState(sizes?.[0] || null);
   const [selectedFlavour, setSelectedFlavour] = useState(null);
-
   const [showPopup, setShowPopup] = useState(false);
-
   const { addToCart } = useContext(CartContext);
+  console.log(showPopup);
 
   function handleAddToCartButtonClick() {
     const hasOptions = sizes.length > 0 ||  flavour.length > 0;
+    console.log(hasOptions);
 
     if (hasOptions && !showPopup) {
       setShowPopup(true);
@@ -105,7 +105,7 @@ const SupplementItem = (supplementItem) => {
                 className="primary sticky bottom-2"
                 type="button"
               >
-                {" "}
+        
                 Add to cart ৳ {selectedPrice}
               </button>
             </div>

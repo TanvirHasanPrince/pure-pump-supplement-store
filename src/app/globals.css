@@ -46,6 +46,10 @@ button[type="submit"]:disabled,
   @apply cursor-not-allowed bg-red-400;
 }
 
+.flying-button-parent button {
+ @apply border-primary  rounded-full px-6 py-2 border-0 bg-primary text-white;
+}
+
 div.tabs > * {
   @apply bg-secondary text-black font-bold rounded-lg py-2 px-4;
 }
