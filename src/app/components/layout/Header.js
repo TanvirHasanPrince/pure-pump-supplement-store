@@ -24,7 +24,6 @@ const Header = () => {
       <nav className="flex items-center gap-6 text-gray-600 font-semibold">
         <Link href={"/"}>Home</Link>
         <Link href={"/products"}>Supplements</Link>
-        <Link href={""}>Accesories</Link>
         <Link href={"/#about"}>About</Link>
         <Link href={""}>Contact</Link>
       </nav>
@@ -66,7 +65,10 @@ const Header = () => {
 
         <Link href="/cart" className="relative">
           <ShoppingCart></ShoppingCart>
-          <span className="absolute -top-2 -right-2 bg-primary text-white text-sm p-1 rounded-full leading-3"> {cartProducts.length}</span>
+          <span className="absolute -top-2 -right-2 bg-primary text-white text-sm p-1 rounded-full leading-3">
+            {" "}
+            {cartProducts.length}
+          </span>
         </Link>
       </nav>
     </header>

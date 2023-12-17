@@ -1,5 +1,5 @@
 "use client";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import SectionHeaders from "../components/layout/SectionHeaders";
 import { CartContext, cartProductPrice } from "../components/appContext";
 import Image from "next/image";
@@ -9,9 +9,22 @@ import useProfile from "../components/useProfile";
 
 const CartPage = () => {
   const { cartProducts, removeCartProducts } = useContext(CartContext);
-  const [addrss, setAddress] = useState([]);
-  const {data:profileData} = useProfile()
-  console.log(profileData);
+  const [address, setAddress] = useState([]);
+  const { data: profileData } = useProfile();
+
+  useEffect(() => {
+    if (profileData?.city) {
+      const { phone, houseAddress, city, postCode, country } = profileData;
+      const addressFromProfile = {
+        phone,
+        houseAddress,
+        city,
+        postCode,
+        country,
+      };
+      setAddress(addressFromProfile);
+    }
+  }, [profileData]);
 
   let total = 0;
   for (const p of cartProducts) {
@@ -28,7 +41,7 @@ const CartPage = () => {
         <SectionHeaders mainHeader={"CART"}></SectionHeaders>
       </div>
 
-      <div className="mt-4 grid grid-cols-2 gap-4">
+      <div className="mt-8 grid grid-cols-2 gap-8">
         <div>
           {cartProducts?.length === 0 && (
             <div>No products in your shopping cart</div>
@@ -86,10 +99,10 @@ const CartPage = () => {
           </div>
         </div>
         <div className="bg-gray-200 p-4 rounded-lg">
-          <SectionHeaders  subHeader={"Checkout"}></SectionHeaders>
+          <SectionHeaders subHeader={"Checkout"}></SectionHeaders>
           <form>
             <AddressInput
-              addressProps={{ addrss }}
+              addressProps={address}
               setAddressProp={handleAddressChange}
             ></AddressInput>
             <button type="submit">Pay {total}</button>
