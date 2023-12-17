@@ -12,11 +12,9 @@ const SupplementItem = (supplementItem) => {
   const [selectedFlavour, setSelectedFlavour] = useState(null);
   const [showPopup, setShowPopup] = useState(false);
   const { addToCart } = useContext(CartContext);
-  console.log(showPopup);
 
   function handleAddToCartButtonClick() {
-    const hasOptions = sizes.length > 0 ||  flavour.length > 0;
-    console.log(hasOptions);
+    const hasOptions = sizes.length > 0 || flavour.length > 0;
 
     if (hasOptions && !showPopup) {
       setShowPopup(true);
@@ -105,7 +103,6 @@ const SupplementItem = (supplementItem) => {
                 className="primary sticky bottom-2"
                 type="button"
               >
-        
                 Add to cart ৳ {selectedPrice}
               </button>
             </div>
