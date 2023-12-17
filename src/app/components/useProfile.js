@@ -10,7 +10,7 @@ const useProfile = () => {
     setLoading(true);
     fetch("/api/profile").then((response) => {
       response.json().then((data) => {
-        setData(data?.admin);
+        setData(data);
         setLoading(false);
       });
     });

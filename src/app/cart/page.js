@@ -1,13 +1,26 @@
 "use client";
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import SectionHeaders from "../components/layout/SectionHeaders";
 import { CartContext, cartProductPrice } from "../components/appContext";
 import Image from "next/image";
 import TrashIcon from "../components/icons/TrashIcon";
+import AddressInput from "../components/layout/AddressInput";
+import useProfile from "../components/useProfile";
 
 const CartPage = () => {
   const { cartProducts, removeCartProducts } = useContext(CartContext);
-  console.log(cartProducts);
+  const [addrss, setAddress] = useState([]);
+  const {data:profileData} = useProfile()
+  console.log(profileData);
+
+  let total = 0;
+  for (const p of cartProducts) {
+    total += cartProductPrice(p);
+  }
+
+  function handleAddressChange(propName, value) {
+    setAddress((prevAddress) => ({ ...prevAddress, [propName]: value }));
+  }
 
   return (
     <section className="mt-8">
@@ -53,7 +66,7 @@ const CartPage = () => {
                     </div>
                   </div>
                   <div className="text-lg text-primary font-semibold">
-                    ৳ {cartProductPrice(product)}
+                    <span> ৳ {cartProductPrice(product)}</span>
                   </div>
                   <div className="ml-2">
                     <button
@@ -67,8 +80,21 @@ const CartPage = () => {
                 </div>
               </>
             ))}
+          <div className="py-4 text-right pr-16 text-primary font-bold">
+            <span className="text-gray-500 "> Subtotal:</span>
+            <span className="text-lg font-semibold pl-2"> ৳ {total}</span>
+          </div>
         </div>
-        <div>Right</div>
+        <div className="bg-gray-200 p-4 rounded-lg">
+          <SectionHeaders  subHeader={"Checkout"}></SectionHeaders>
+          <form>
+            <AddressInput
+              addressProps={{ addrss }}
+              setAddressProp={handleAddressChange}
+            ></AddressInput>
+            <button type="submit">Pay {total}</button>
+          </form>
+        </div>
       </div>
     </section>
   );

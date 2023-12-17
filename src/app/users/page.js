@@ -13,16 +13,20 @@ const UserPage = () => {
         setUsers(users);
       })
     );
-    console.log(users);
   }, []);
+
+
 
   const { loading: profileLoading, data: profileData } = useProfile();
   if (profileLoading) {
     return "loading user info....";
   }
-  if (profileData?.admin) {
+      console.log(profileData);
+
+  if (!profileData?.admin) {
     return "Not an idmin";
   }
+
 
   return (
     <section className="max-w-2xl  mx-auto mt-8 ">

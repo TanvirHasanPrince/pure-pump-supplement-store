@@ -48,10 +48,9 @@ const CategoriesPage = () => {
     return "loading user info....";
   }
 
-  if (profileData?.admin) {
+  if (!profileData?.admin) {
     return "Not an idmin";
   }
-
   async function handleDeleteClick(_id) {
     const promise = new Promise(async (resolve, reject) => {
       const response = await fetch("/api/categories?_id=" + _id, {

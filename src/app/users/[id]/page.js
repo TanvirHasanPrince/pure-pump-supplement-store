@@ -42,9 +42,9 @@ const EditUserPage = () => {
   if (profileLoading) {
     return "loading user info....";
   }
-  if (profileData?.admin) {
-    return "Not an idmin";
-  }
+   if (!profileData?.admin) {
+     return "Not an idmin";
+   }
 
   return (
     <section className="mt-8 mx-auto max-w-lg">

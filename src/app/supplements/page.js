@@ -21,8 +21,7 @@ const SupplementsPage = () => {
   if (profileLoading) {
     return "loading supplements....";
   }
-
-  if (profileData?.admin) {
+  if (!profileData?.admin) {
     return "Not an idmin";
   }
 
