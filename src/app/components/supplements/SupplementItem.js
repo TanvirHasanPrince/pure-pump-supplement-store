@@ -16,19 +16,15 @@ const SupplementItem = (supplementItem) => {
   const { addToCart } = useContext(CartContext);
 
   function handleAddToCartButtonClick() {
-    if (showPopup) {
-      addToCart(supplementItem, selectedSize, selectedFlavour);
+    const hasOptions = sizes.length > 0 ||  flavour.length > 0;
 
-      toast.success("Added to cart!");
-      setShowPopup(false);
+    if (hasOptions && !showPopup) {
+      setShowPopup(true);
       return;
     }
-    if (sizes.length === 0 && flavour.length === 0) {
-      addToCart(supplementItem);
-      toast.success("Added to cart!");
-    } else {
-      setShowPopup(true);
-    }
+    addToCart(supplementItem, selectedSize, selectedFlavour);
+    setShowPopup(false);
+    toast.success("Added to cart!");
   }
 
   let selectedPrice = basePrice;
