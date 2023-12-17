@@ -4,6 +4,14 @@ import { createContext, useEffect, useState } from "react";
 
 export const CartContext = createContext({});
 
+export function cartProductPrice(cartProduct) {
+  let price = cartProduct.basePrice;
+  if (cartProduct.size) {
+    price = cartProduct.size.price + price;
+  }
+  return price;
+}
+
 const AppProvider = ({ children }) => {
   const [cartProducts, setCartProducts] = useState([]);
   const localStorage =
@@ -36,8 +44,8 @@ const AppProvider = ({ children }) => {
     }
   }, []);
 
-  function addToCart(productId, size = null, extras = []) {
-    const cartProducts = { ...productId, size, extras };
+  function addToCart(productId, size = null, flavour = []) {
+    const cartProducts = { ...productId, size, flavour };
     setCartProducts((previousProducts) => {
       const newProducts = [...previousProducts, cartProducts];
       saveCartProductsToLocalStorage(newProducts);

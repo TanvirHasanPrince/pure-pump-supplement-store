@@ -66,7 +66,7 @@ const Header = () => {
 
         <Link href="/cart" className="relative">
           <ShoppingCart></ShoppingCart>
-          <span className="absolute -top-2 -right-2 bg-primary text-white text-small p-1 rounded-full leading-3"> {cartProducts.length}</span>
+          <span className="absolute -top-2 -right-2 bg-primary text-white text-sm p-1 rounded-full leading-3"> {cartProducts.length}</span>
         </Link>
       </nav>
     </header>
