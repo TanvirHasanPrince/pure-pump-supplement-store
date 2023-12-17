@@ -106,7 +106,7 @@ const SupplementItem = (supplementItem) => {
                 type="button"
               >
                 {" "}
-                Add to cart BDT {selectedPrice}
+                Add to cart ৳ {selectedPrice}
               </button>
             </div>
           </div>

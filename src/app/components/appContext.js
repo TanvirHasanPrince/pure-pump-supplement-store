@@ -23,7 +23,7 @@ const AppProvider = ({ children }) => {
     }
   }
 
-  function removeCartProducts(indexToRemove) {
+   function removeCartProducts(indexToRemove) {
     setCartProducts((previousCartProducts) => {
       const newCartProducts = previousCartProducts.filter(
         (v, index) => index !== indexToRemove

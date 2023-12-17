@@ -23,9 +23,9 @@ const SupplementItemTile = ({ onAddToCart, ...item }) => {
         className="bg-primary mt-4 text-white rounded-full px-8 py-2 mb-5"
       >
         {sizes?.length > 0 || flavour?.length > 0 ? (
-          <span>Starts From BDT. {basePrice} </span>
+          <span>Starts From ৳ {basePrice} </span>
         ) : (
-          <span> Add to cart BDT. {basePrice}</span>
+          <span> Add to cart ৳ {basePrice}</span>
         )}
       </button>
     </div>

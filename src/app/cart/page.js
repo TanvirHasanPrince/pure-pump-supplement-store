@@ -6,7 +6,8 @@ import Image from "next/image";
 import TrashIcon from "../components/icons/TrashIcon";
 
 const CartPage = () => {
-  const { cartProducts } = useContext(CartContext);
+  const { cartProducts, removeCartProducts } = useContext(CartContext);
+  console.log(cartProducts);
 
   return (
     <section className="mt-8">
@@ -21,7 +22,7 @@ const CartPage = () => {
           )}
 
           {cartProducts?.length > 0 &&
-            cartProducts.map((product) => (
+            cartProducts.map((product, index) => (
               <>
                 <div className="flex items-center gap-4 mb-2 border-b py-2">
                   <div className="w-24">
@@ -52,10 +53,14 @@ const CartPage = () => {
                     </div>
                   </div>
                   <div className="text-lg text-primary font-semibold">
-                    {cartProductPrice(product)}
+                    ৳ {cartProductPrice(product)}
                   </div>
                   <div className="ml-2">
-                    <button className="bg-primary text-white px-2 py-2 rounded-md">
+                    <button
+                      type="button"
+                      onClick={() => removeCartProducts(index)}
+                      className="bg-primary text-white px-2 py-2 rounded-md"
+                    >
                       <TrashIcon></TrashIcon>
                     </button>
                   </div>
