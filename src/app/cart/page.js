@@ -6,6 +6,7 @@ import Image from "next/image";
 import TrashIcon from "../components/icons/TrashIcon";
 import AddressInput from "../components/layout/AddressInput";
 import useProfile from "../components/useProfile";
+import toast from "react-hot-toast";
 
 const CartPage = () => {
   const { cartProducts, removeCartProducts } = useContext(CartContext);
@@ -35,20 +36,46 @@ const CartPage = () => {
     setAddress((prevAddress) => ({ ...prevAddress, [propName]: value }));
   }
 
-  async function proceedToCheckOut(ev) {
-    ev.preventDefault();
-    //Address and cart products
+async function proceedToCheckOut(ev) {
+  ev.preventDefault();
+
+  // Show loading toast
+  toast.loading("Redirecting to payment, please wait...", {
+    autoClose: false,
+    hideProgressBar: true,
+  });
+
+  try {
+    // Address and cart products
     const response = await fetch("/api/checkout", {
       method: "POST",
-      header: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         address,
         cartProducts,
       }),
     });
-    const link = await response.json();
-    // window.location = link;
+
+    if (response.ok) {
+      const link = await response.json();
+      // Hide loading toast
+      toast.dismiss();
+      // Redirect to the checkout page
+      window.location = link;
+    } else {
+      // Hide loading toast
+      toast.dismiss();
+      // Show error toast
+      toast.error("Failed to process checkout. Please try again.");
+    }
+  } catch (error) {
+    // Hide loading toast
+    toast.dismiss();
+    // Show error toast for unexpected errors
+    toast.error("An unexpected error occurred. Please try again.");
+    console.error("Error during checkout:", error);
   }
+}
 
   return (
     <section className="mt-8">
