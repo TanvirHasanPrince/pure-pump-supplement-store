@@ -13,6 +13,14 @@ const CartPage = () => {
   const [address, setAddress] = useState([]);
   const { data: profileData } = useProfile();
 
+useEffect(() => {
+  if (typeof window !== "undefined") {
+    if (window.location.href.includes("cancelled=1")) {
+      toast.error("Payment Failed");
+    }
+  }
+}, []); 
+
   useEffect(() => {
     if (profileData?.city) {
       const { phone, houseAddress, city, postCode, country } = profileData;
@@ -36,46 +44,46 @@ const CartPage = () => {
     setAddress((prevAddress) => ({ ...prevAddress, [propName]: value }));
   }
 
-async function proceedToCheckOut(ev) {
-  ev.preventDefault();
+  async function proceedToCheckOut(ev) {
+    ev.preventDefault();
 
-  // Show loading toast
-  toast.loading("Redirecting to payment, please wait...", {
-    autoClose: false,
-    hideProgressBar: true,
-  });
-
-  try {
-    // Address and cart products
-    const response = await fetch("/api/checkout", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        address,
-        cartProducts,
-      }),
+    // Show loading toast
+    toast.loading("Redirecting to payment, please wait...", {
+      autoClose: false,
+      hideProgressBar: true,
     });
 
-    if (response.ok) {
-      const link = await response.json();
+    try {
+      // Address and cart products
+      const response = await fetch("/api/checkout", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          address,
+          cartProducts,
+        }),
+      });
+
+      if (response.ok) {
+        const link = await response.json();
+        // Hide loading toast
+        toast.dismiss();
+        // Redirect to the checkout page
+        window.location = link;
+      } else {
+        // Hide loading toast
+        toast.dismiss();
+        // Show error toast
+        toast.error("Failed to process checkout. Please try again.");
+      }
+    } catch (error) {
       // Hide loading toast
       toast.dismiss();
-      // Redirect to the checkout page
-      window.location = link;
-    } else {
-      // Hide loading toast
-      toast.dismiss();
-      // Show error toast
-      toast.error("Failed to process checkout. Please try again.");
+      // Show error toast for unexpected errors
+      toast.error("An unexpected error occurred. Please try again.");
+      console.error("Error during checkout:", error);
     }
-  } catch (error) {
-    // Hide loading toast
-    toast.dismiss();
-    // Show error toast for unexpected errors
-    toast.error("An unexpected error occurred. Please try again.");
-    console.error("Error during checkout:", error);
   }
-}
 
   return (
     <section className="mt-8">
