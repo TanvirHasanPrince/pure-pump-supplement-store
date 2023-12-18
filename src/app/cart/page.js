@@ -13,13 +13,13 @@ const CartPage = () => {
   const [address, setAddress] = useState([]);
   const { data: profileData } = useProfile();
 
-useEffect(() => {
-  if (typeof window !== "undefined") {
-    if (window.location.href.includes("cancelled=1")) {
-      toast.error("Payment Failed");
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      if (window.location.href.includes("cancelled=1")) {
+        toast.error("Payment Failed");
+      }
     }
-  }
-}, []); 
+  }, []);
 
   useEffect(() => {
     if (profileData?.city) {
@@ -83,6 +83,15 @@ useEffect(() => {
       toast.error("An unexpected error occurred. Please try again.");
       console.error("Error during checkout:", error);
     }
+  }
+
+  if (cartProducts?.length === 0) {
+    return (
+      <section className="mt-8 text-center">
+        <SectionHeaders mainHeader={"Cart"}></SectionHeaders>
+        <p className="mt-4"> Your Shopping cart is empty 😔</p>
+      </section>
+    );
   }
 
   return (
