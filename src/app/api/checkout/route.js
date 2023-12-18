@@ -62,7 +62,10 @@ export async function POST(req) {
     mode: "payment",
     customer_email: userEmail,
     success_url:
-      process.env.NEXTAUTH_URL + "order/" + orderDocument._id.toString(),
+      process.env.NEXTAUTH_URL +
+      "orders/" +
+      orderDocument._id.toString() +
+      "?clear-cart=1",
     cancel_url: process.env.NEXTAUTH_URL + "cart?cancelled=1",
     metadata: { orderId: orderDocument._id.toString() },
     payment_intent_data: {
