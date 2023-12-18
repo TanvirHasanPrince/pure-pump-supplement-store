@@ -36,6 +36,7 @@ const CartPage = () => {
   }
 
   async function proceedToCheckOut(ev) {
+    ev.preventDefault();
     //Address and cart products
     const response = await fetch("/api/checkout", {
       method: "POST",
@@ -46,7 +47,7 @@ const CartPage = () => {
       }),
     });
     const link = await response.json();
-    window.location = link;
+    // window.location = link;
   }
 
   return (
@@ -114,7 +115,7 @@ const CartPage = () => {
               <br />
               Total:
             </div>
-            <div className="text-lg font-semibold pl-2 text-right">
+            <div className=" font-semibold pl-2 text-right">
               ৳ {subTotal} <br />৳ 50 <br></br> {subTotal + 50}
             </div>
           </div>
