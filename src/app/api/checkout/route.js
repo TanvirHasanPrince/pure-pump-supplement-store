@@ -11,7 +11,6 @@ export async function POST(req) {
   const { cartProducts, address } = await req.json();
   const session = await getServerSession(authOptions);
   const userEmail = session?.user?.email;
-  console.log(userEmail);
 
   const orderDocument = await Order.create({
     userEmail,
@@ -19,8 +18,6 @@ export async function POST(req) {
     cartProducts,
     paid: false,
   });
-
-
 
   const stripeLineItems = [];
   for (const cartProduct of cartProducts) {
@@ -31,19 +28,19 @@ export async function POST(req) {
         (size) => size._id.toString() === cartProduct.size._id.toString()
       );
       productPrice += size.price;
+      console.log(productPrice);
     }
 
-    if (cartProduct.flavour?.length > 0) {
-      for (const cartProductFlavour of cartProduct.flavour) {
-        const flavourInfo = productInfo.flavour.find(
-          (flavour) =>
-            flavour._id.toString() === cartProductFlavour._id.toString()
-        );
+    if (cartProduct.flavour) {
+      const flavourInfo = productInfo.flavour.find(
+        (flavour) =>
+          flavour._id.toString() === cartProduct.flavour._id.toString()
+      );
+      if (flavourInfo) {
         productPrice += flavourInfo.price;
       }
+      console.log(productPrice);
     }
-
-
 
     const productName = cartProduct.name;
 
