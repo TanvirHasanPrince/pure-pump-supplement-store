@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import SectionHeaders from "../components/layout/SectionHeaders";
 import UserTabs from "../components/layout/UserTabs";
 import useProfile from "../components/useProfile";
+import { dbStandardTime } from "../../libs/DataTime";
 
 const OrdersPage = () => {
   const { loading: profileLoading, data: profile } = useProfile();
@@ -54,7 +55,7 @@ const OrdersPage = () => {
                   {order.paid ? "Paid" : "Not paid"}
                 </span>
               </div>
-              <div>{order.createdAt}</div>
+              <div>{dbStandardTime(order.createdAt)}</div>
             </div>
           ))}
       </div>
