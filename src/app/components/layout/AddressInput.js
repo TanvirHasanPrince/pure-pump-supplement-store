@@ -1,10 +1,11 @@
-const AddressInput = ({ addressProps, setAddressProp }) => {
+const AddressInput = ({ addressProps, setAddressProp, disabled = false }) => {
   const { phone, houseAddress, city, postCode, country } = addressProps;
 
   return (
     <>
       <label> Phone number</label>
       <input
+        disabled={disabled}
         type="tel"
         placeholder="Phone number"
         value={phone}
@@ -12,6 +13,7 @@ const AddressInput = ({ addressProps, setAddressProp }) => {
       />
       <label> House Address</label>
       <input
+        disabled={disabled}
         type="text"
         placeholder="House address"
         value={houseAddress}
@@ -22,6 +24,7 @@ const AddressInput = ({ addressProps, setAddressProp }) => {
         <div>
           <label> City</label>
           <input
+            disabled={disabled}
             type="text"
             placeholder="City"
             value={city}
@@ -31,6 +34,7 @@ const AddressInput = ({ addressProps, setAddressProp }) => {
         <div>
           <label> Post Code</label>
           <input
+            disabled={disabled}
             type="text"
             placeholder="Postal code"
             value={postCode}
@@ -41,6 +45,7 @@ const AddressInput = ({ addressProps, setAddressProp }) => {
 
       <label> Country</label>
       <input
+        disabled={disabled}
         type="text"
         placeholder="Country"
         value={country}

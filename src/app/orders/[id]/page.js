@@ -1,27 +1,51 @@
-'use client'
+"use client";
 import { CartContext } from "@/app/components/appContext";
+import AddressInput from "@/app/components/layout/AddressInput";
 import SectionHeaders from "@/app/components/layout/SectionHeaders";
-import React, { useContext, useEffect } from "react";
+import { useParams } from "next/navigation";
+import React, { useContext, useEffect, useState } from "react";
 
 const OrderPage = () => {
- const {clearCart} = useContext(CartContext)
- useEffect(() => {
-   if (typeof window !== "undefined") {
-     if (window.location.href.includes("clear-cart=1")) {
-       clearCart();
-     }
-   }
- }, []); 
+  const { clearCart } = useContext(CartContext);
+  const [order, setOrder] = useState();
+  const { id } = useParams();
 
- 
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      if (window.location.href.includes("clear-cart=1")) {
+        clearCart();
+      }
+    }
+
+    if (id) {
+      fetch("/api/orders?_id=" + id).then((res) => {
+        res.json().then((orderData) => {
+          setOrder(orderData);
+        });
+      });
+    }
+  }, []);
+
   return (
-    <section className="max-w-lg text-center mx-auto mt-8">
-      <SectionHeaders mainHeader={"Your Order"}></SectionHeaders>
+    <section className="max-w-2xl mx-auto mt-8">
+      <div className="text-center">
+        <SectionHeaders mainHeader={"Your Order"}></SectionHeaders>
+        <div className="my-4">
+          <p>Thanks for your order</p>
+          <p>We will call you when your order is on the way</p>
+        </div>
+      </div>
 
-      <di className="my-4">
-        <p>Thanks for your order</p>
-        <p>We will call you when your order is on the way</p>
-      </di>
+      {order && (
+        <div className="grid grid-cols-2 gap-16">
+          <div>Left</div>
+          <div>
+            <div className="bg-gray-100 p-4 rounded-lg">
+              <AddressInput disabled = {true} addressProps={{ ...order }} />
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 };
