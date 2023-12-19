@@ -5,16 +5,28 @@ import UserTabs from "../components/layout/UserTabs";
 import useProfile from "../components/useProfile";
 
 const OrdersPage = () => {
-  const { loading, data: profile } = useProfile();
+  const { loading: profileLoading, data: profile } = useProfile();
 
   const [orders, setOrders] = useState([]);
   useEffect(() => {
-    fetch("/api/orders").then((res) => {
-      res.json().then((orders) => {
+    fetch("/api/orders")
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error(`Network response was not ok: ${res.status}`);
+        }
+        return res.json();
+      })
+      .then((orders) => {
         setOrders(orders);
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
       });
-    });
   }, []);
+
+  if (profileLoading) {
+    return "loading orders....Please wait";
+  }
 
   return (
     <section className="mt-8 max-w-2xl mx-auto">
@@ -30,7 +42,18 @@ const OrdersPage = () => {
               key={order._id}
             >
               <div>{order.userEmail}</div>
-              <div>{order.paid ? "Paid" : "Not paid"}</div>
+              <div className="text-center">
+                <span
+                  className={
+                    order?.paid
+                      ? "bg-secondary font-bold text-black p-2 rounded-lg"
+                      : "bg-primary text-white font-bold  p-2 rounded-lg"
+                  }
+                >
+                  {" "}
+                  {order.paid ? "Paid" : "Not paid"}
+                </span>
+              </div>
               <div>{order.createdAt}</div>
             </div>
           ))}

@@ -63,7 +63,7 @@ const UserForm = ({ user, onSave }) => {
             addressProps={{ phone, houseAddress, postCode, city, country }}
             setAddressProp={handleAddressChange}
           ></AddressInput>
-          {loggedInUserData && (
+          {loggedInUserData?.admin && (
             <div>
               <label
                 className="p-2 inline-flex items-center gap-2  mb-4"
