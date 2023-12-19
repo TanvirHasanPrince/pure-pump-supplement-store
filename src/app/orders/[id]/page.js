@@ -1,5 +1,5 @@
 "use client";
-import { CartContext } from "@/app/components/appContext";
+import { CartContext, cartProductPrice } from "@/app/components/appContext";
 import AddressInput from "@/app/components/layout/AddressInput";
 import SectionHeaders from "@/app/components/layout/SectionHeaders";
 import { useParams } from "next/navigation";
@@ -27,6 +27,12 @@ const OrderPage = () => {
     }
   }, []);
 
+    let subTotal = 0;
+  if (order?.cartProducts) {
+    for (const product of order?.cartProducts) {
+      subTotal += cartProductPrice(product);
+    }
+  }
   return (
     <section className="max-w-2xl mx-auto mt-8">
       <div className="text-center">
@@ -43,10 +49,22 @@ const OrderPage = () => {
             {order.cartProducts.map((product, index) => (
               <CartProduct key={index} product={product}></CartProduct>
             ))}
+            <div className="py-4 flex items-center justify-end text-primary font-bold">
+              <div className="text-gray-500 ">
+                Subtotal: <br />
+                Delivery Fee:
+                <br />
+                Total:
+              </div>
+              <div className=" font-semibold pl-2 text-right">
+                ৳ {subTotal} <br />৳ 50 <br></br> {subTotal + 50}
+              </div>
+            </div>
           </div>
+
           <div>
             <div className="bg-gray-100 p-4 rounded-lg">
-              <AddressInput disabled = {true} addressProps={{ ...order }} />
+              <AddressInput disabled={true} addressProps={{ ...order }} />
             </div>
           </div>
         </div>
