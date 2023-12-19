@@ -26,7 +26,7 @@ const SupplementsPage = () => {
   }
 
   return (
-    <section className="mt-8 max-w-md mx-auto">
+    <section className="mt-8 max-w-2xl mx-auto">
       <UserTabs isAdmin={true}></UserTabs>
       <div className="max-w-lg mx-auto mt-8 text-center text-sm">
         <Link
@@ -40,7 +40,7 @@ const SupplementsPage = () => {
         <h2 className="text-primary font-bold text-lg my-4">
           Edit Supplement Item
         </h2>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 grid-cols-1 gap-3">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
           {supplementItems.length > 0 &&
             supplementItems.map((item) => (
               <Link

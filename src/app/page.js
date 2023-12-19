@@ -7,7 +7,6 @@ import HomeAboutUs from "./components/layout/HomeAboutUs";
 export default function Home() {
   return (
     <>
-     
       <Hero></Hero>
       <HomeCategories></HomeCategories>
       {/* <HomeAccessories></HomeAccessories> */}

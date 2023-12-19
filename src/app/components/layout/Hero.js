@@ -33,11 +33,9 @@ const Hero = () => {
         </div>
       </div>
 
-      <div className="relative">
+      <div className="relative hidden md:block lg:block">
         <Image
-          src={
-            "/banner-gym-supplements-jpeg.png"
-          }
+          src={"/banner-gym-supplements-jpeg.png"}
           layout={"fill"}
           objectFit={"contain"}
           alt="banner-image of a supplement"

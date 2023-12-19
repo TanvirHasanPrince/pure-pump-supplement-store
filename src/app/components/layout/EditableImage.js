@@ -50,7 +50,7 @@ export default function EditableImage({ link, setLink }) {
           <label>
             <input type="file" hidden onChange={handleFileChange} />
             <span className="bg-secondary text-black px-8 py-2 rounded-md font-bold cursor-pointer">
-              Edit
+              Edit 
             </span>
           </label>
         </div>

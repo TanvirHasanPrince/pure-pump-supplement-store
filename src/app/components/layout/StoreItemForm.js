@@ -36,7 +36,7 @@ const StoreItemForm = ({ onSubmit, storeItem }) => {
       className="mt-8 max-w-lg mx-auto"
     >
       <div
-        className="grid items-start gap-2"
+        className="md:grid lg:grid  items-start gap-2"
         style={{ gridTemplateColumns: ".3fr .7fr" }}
       >
         <div className="">

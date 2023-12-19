@@ -33,7 +33,7 @@ const HomeAboutUs = () => {
             your fitness experience truly exceptional.
           </p>
         </div>
-        <div className="relative">
+        <div className="relative hidden md:block lg:block">
           <Image
             src={"/gym-supplements-about-us-png.png"}
             layout={"fill"}

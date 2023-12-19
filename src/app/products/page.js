@@ -28,7 +28,7 @@ const SupplementPage = () => {
             <div className="text-center ">
               <SectionHeaders subHeader={c.name} />
             </div>
-            <div className="grid grid-cols-4 gap-4 mg-6 mb-12">
+            <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-4 ml-2">
               {supplementItems
                 .filter((m) => m.category === c._id)
                 .map((item) => (

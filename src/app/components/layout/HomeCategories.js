@@ -23,7 +23,7 @@ const HomeCategories = () => {
           mainHeader={"Supplements"}
         ></SectionHeaders>
       </div>
-      <div className="grid grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {last8?.length > 0 &&
           last8.map((item) => <SupplementItem key={item._id} {...item}></SupplementItem>)}
       </div>
