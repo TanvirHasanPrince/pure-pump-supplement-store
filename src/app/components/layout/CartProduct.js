@@ -37,13 +37,15 @@ const CartProduct = ({ product, onRemove }) => {
         <span> ৳ {cartProductPrice(product)}</span>
       </div>
       <div className="ml-2">
-        <button
-          type="button"
-          onClick={() => onRemove(index)}
-          className="bg-primary text-white px-2 py-2 rounded-md"
-        >
-          <TrashIcon></TrashIcon>
-        </button>
+        {!!onRemove && (
+          <button
+            type="button"
+            onClick={() => onRemove(index)}
+            className="bg-primary text-white px-2 py-2 rounded-md"
+          >
+            <TrashIcon></TrashIcon>
+          </button>
+        )}
       </div>
     </div>
   );

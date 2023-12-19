@@ -4,6 +4,7 @@ import AddressInput from "@/app/components/layout/AddressInput";
 import SectionHeaders from "@/app/components/layout/SectionHeaders";
 import { useParams } from "next/navigation";
 import React, { useContext, useEffect, useState } from "react";
+import CartProduct from '../../components/layout/CartProduct'
 
 const OrderPage = () => {
   const { clearCart } = useContext(CartContext);
@@ -38,7 +39,11 @@ const OrderPage = () => {
 
       {order && (
         <div className="grid grid-cols-2 gap-16">
-          <div>Left</div>
+          <div>
+            {order.cartProducts.map((product, index) => (
+              <CartProduct key={index} product={product}></CartProduct>
+            ))}
+          </div>
           <div>
             <div className="bg-gray-100 p-4 rounded-lg">
               <AddressInput disabled = {true} addressProps={{ ...order }} />
