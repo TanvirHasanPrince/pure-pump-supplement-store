@@ -4,26 +4,26 @@ import SectionHeaders from "../components/layout/SectionHeaders";
 import UserTabs from "../components/layout/UserTabs";
 import useProfile from "../components/useProfile";
 import { dbStandardTime } from "../../libs/DataTime";
+import Link from "next/link";
 
 const OrdersPage = () => {
-  const { loading: profileLoading, data: profile } = useProfile();
-
   const [orders, setOrders] = useState([]);
-  useEffect(() => {
-    fetch("/api/orders")
-      .then((res) => {
-        if (!res.ok) {
-          throw new Error(`Network response was not ok: ${res.status}`);
-        }
-        return res.json();
-      })
-      .then((orders) => {
-        setOrders(orders);
-      })
-      .catch((error) => {
-        console.error("Error fetching data:", error);
+  const { loading: profileLoading, data: profile } = useProfile();
+  const [loadingOrders, setLoadingOrders] = useState(true);
+
+    useEffect(() => {
+      fetchOrders();
+    }, []);
+
+    function fetchOrders() {
+      setLoadingOrders(true);
+      fetch("/api/orders").then((res) => {
+        res.json().then((orders) => {
+          setOrders(orders.reverse());
+          setLoadingOrders(false);
+        });
       });
-  }, []);
+    }
 
   if (profileLoading) {
     return "loading orders....Please wait";
@@ -35,27 +35,42 @@ const OrdersPage = () => {
       <div className="text-center">
         <SectionHeaders subHeader={"Orders"}></SectionHeaders>
       </div>
-      <div className="mt-2">
+      <div className="mt-8">
+        {loadingOrders && <div>Loading orders...</div>}
         {orders?.length > 0 &&
           orders.map((order) => (
             <div
-              className="bg-gray-100 mb-2 p-4 rounded-lg grid grid-cols-3 "
               key={order._id}
+              className="bg-gray-100 mb-2 p-4 rounded-lg flex flex-col md:flex-row items-center gap-6"
             >
-              <div>{order.userEmail}</div>
-              <div className="text-center">
-                <span
-                  className={
-                    order?.paid
-                      ? "bg-secondary font-bold text-black p-2 rounded-lg"
-                      : "bg-primary text-white font-bold  p-2 rounded-lg"
-                  }
-                >
-                  {" "}
-                  {order.paid ? "Paid" : "Not paid"}
-                </span>
+              <div className="grow flex flex-col md:flex-row items-center gap-6">
+                <div>
+                  <div
+                    className={
+                      (order.paid ? "bg-green-500" : "bg-red-400") +
+                      " p-2 rounded-md text-white w-24 text-center"
+                    }
+                  >
+                    {order.paid ? "Paid" : "Not paid"}
+                  </div>
+                </div>
+                <div className="grow">
+                  <div className="flex gap-2 items-center mb-1">
+                    <div className="grow">{order.userEmail}</div>
+                    <div className="text-gray-500 text-sm">
+                      {dbStandardTime(order.createdAt)}
+                    </div>
+                  </div>
+                  <div className="text-gray-500 text-xs">
+                    {order.cartProducts.map((p) => p.name).join(", ")}
+                  </div>
+                </div>
               </div>
-              <div>{dbStandardTime(order.createdAt)}</div>
+              <div className="justify-end flex gap-2 items-center whitespace-nowrap">
+                <Link href={"/orders/" + order._id} className="bg-primary font-bold text-white p-2 rounded-lg">
+                  Show order
+                </Link>
+              </div>
             </div>
           ))}
       </div>
