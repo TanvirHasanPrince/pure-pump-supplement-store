@@ -12,7 +12,7 @@ const UserForm = ({ user, onSave }) => {
   const [city, setCity] = useState(user?.city || "");
   const [postCode, setPostalCode] = useState(user?.postCode || "");
   const [country, setCountry] = useState(user?.country || "");
-  const [admin, setAdmin] = useState(user?.admin || "");
+  const [admin, setAdmin] = useState(user?.admin || false);
   const { data: loggedInUserData } = useProfile();
 
   function handleAddressChange(propName, value) {
