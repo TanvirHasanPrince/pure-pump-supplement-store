@@ -11,19 +11,29 @@ const OrdersPage = () => {
   const { loading: profileLoading, data: profile } = useProfile();
   const [loadingOrders, setLoadingOrders] = useState(true);
 
-    useEffect(() => {
-      fetchOrders();
-    }, []);
+  useEffect(() => {
+    fetchOrders();
+  }, []);
 
-    function fetchOrders() {
-      setLoadingOrders(true);
-      fetch("/api/orders").then((res) => {
-        res.json().then((orders) => {
-          setOrders(orders.reverse());
-          setLoadingOrders(false);
-        });
-      });
-    }
+function fetchOrders() {
+  setLoadingOrders(true);
+  fetch("/api/orders")
+    .then((res) => {
+      if (!res.ok) {
+        throw new Error(`Network response was not ok: ${res.status}`);
+      }
+      return res.json();
+    })
+    .then((orders) => {
+      setOrders(orders.reverse());
+      setLoadingOrders(false);
+    })
+    .catch((error) => {
+      console.error("Error fetching orders:", error);
+      // Handle error state, e.g., set an error flag or show an error message to the user
+      setLoadingOrders(false);
+    });
+}
 
   if (profileLoading) {
     return "loading orders....Please wait";
@@ -67,7 +77,10 @@ const OrdersPage = () => {
                 </div>
               </div>
               <div className="justify-end flex gap-2 items-center whitespace-nowrap">
-                <Link href={"/orders/" + order._id} className="bg-primary font-bold text-white p-2 rounded-lg">
+                <Link
+                  href={"/orders/" + order._id}
+                  className="bg-primary font-bold text-white p-2 rounded-lg"
+                >
                   Show order
                 </Link>
               </div>
