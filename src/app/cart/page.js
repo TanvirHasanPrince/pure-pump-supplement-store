@@ -110,7 +110,7 @@ const CartPage = () => {
               <CartProduct
                 key={index}
                 product={product}
-                onRemove={removeCartProducts}
+                onRemove={() => removeCartProducts(product._id)}
               ></CartProduct>
             ))}
           <div className="py-4 flex items-center justify-end text-primary font-bold">

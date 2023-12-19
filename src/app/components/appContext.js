@@ -24,17 +24,17 @@ const AppProvider = ({ children }) => {
     }
   }
 
-  function removeCartProducts(indexToRemove) {
-    setCartProducts((previousCartProducts) => {
-      const newCartProducts = previousCartProducts.filter(
-        (v, index) => index !== indexToRemove
-      );
-      saveCartProductsToLocalStorage(newCartProducts);
+function removeCartProducts(productIdToRemove) {
+  setCartProducts((previousCartProducts) => {
+    const newCartProducts = previousCartProducts.filter(
+      (product) => product._id !== productIdToRemove
+    );
+    saveCartProductsToLocalStorage(newCartProducts);
 
-      return newCartProducts;
-    });
-    toast.success("Product Removed");
-  }
+    return newCartProducts;
+  });
+  toast.success("Product Removed");
+}
 
   function clearCart() {
     setCartProducts([]);

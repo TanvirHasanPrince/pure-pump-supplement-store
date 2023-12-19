@@ -40,7 +40,7 @@ const CartProduct = ({ product, onRemove }) => {
         {!!onRemove && (
           <button
             type="button"
-            onClick={() => onRemove(index)}
+            onClick={() => onRemove(product._id)}
             className="bg-primary text-white px-2 py-2 rounded-md"
           >
             <TrashIcon></TrashIcon>
