@@ -184,7 +184,7 @@ const FooterSection = () => {
                 <path d="M1.5 8.67v8.58a3 3 0 003 3h15a3 3 0 003-3V8.67l-8.928 5.493a3 3 0 01-3.144 0L1.5 8.67z" />
                 <path d="M21 5.33a3 3 0 00-3-3H6a3 3 0 00-3 3v1.992L12 12l9-4.676V5.33z" />
               </svg>
-              info@purepump.com
+              t.hasan.prince@gmail.com
             </p>
             <p className="flex items-center justify-center md:justify-start">
               <svg
@@ -208,7 +208,7 @@ const FooterSection = () => {
           className="font-semibold text-neutral-600 dark:text-neutral-400"
           href="https://tw-elements.com/"
         >
-          Pure Pump
+          Pure Pump - Developed by Tanvir Hasan Prince
         </a>
       </div>
     </footer>
