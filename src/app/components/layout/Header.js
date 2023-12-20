@@ -85,7 +85,10 @@ const Header = () => {
       </div>
       {mobileNavOpen && (
         <div className="md:hidden lg:hidden p-4 bg-gray-200 rounded-lg mt-2">
-          <nav className="flex flex-col items-center gap-4 text-gray-600 font-semibold">
+          <nav
+            onClick={() => setMobileNavOpen(false)}
+            className="flex flex-col items-center gap-4 text-gray-600 font-semibold"
+          >
             <Link href={"/"}>Home</Link>
             <Link href={"/products"}>Supplements</Link>
             <Link href={"/#about"}>About</Link>
