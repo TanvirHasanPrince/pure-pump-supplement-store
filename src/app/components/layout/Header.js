@@ -9,6 +9,7 @@ import MenuIconBars3 from "../../components/icons/MenuIconBars3";
 
 const Header = () => {
   const session = useSession();
+  console.log(session);
   const status = session.status;
   const userData = session?.data?.user;
   let userName = userData?.name || userData?.email;
@@ -120,6 +121,7 @@ const Header = () => {
               {" "}
               {cartProducts.length}
             </span>
+         
           </Link>
         </nav>
       </div>
