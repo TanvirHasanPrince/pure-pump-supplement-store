@@ -133,7 +133,7 @@ const CartPage = () => {
               addressProps={address}
               setAddressProp={handleAddressChange}
             ></AddressInput>
-            <button type="submit">Pay {subTotal + 50}</button>
+            <button type="submit">Pay ${subTotal + 50}</button>
           </form>
         </div>
       </div>
