@@ -17,7 +17,7 @@ const RegisterPage = () => {
     setError(false);
     setUserCreated(false);
 
-    const response = await fetch("api/register", {
+    const response = await fetch("/api/register", {
       method: "POST",
       body: JSON.stringify({ email, password }),
       headers: { "Content-Type": "application/json" },
