@@ -103,7 +103,7 @@ const SupplementItem = (supplementItem) => {
                 className="primary sticky bottom-2"
                 type="button"
               >
-                Add to cart ৳ {selectedPrice}
+                Add to cart $ {selectedPrice}
               </button>
             </div>
           </div>

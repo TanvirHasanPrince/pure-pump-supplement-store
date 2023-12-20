@@ -34,7 +34,7 @@ const CartProduct = ({ product, onRemove }) => {
         </div>
       </div>
       <div className="text-lg text-primary font-semibold">
-        <span> ৳ {cartProductPrice(product)}</span>
+        <span> $ {cartProductPrice(product)}</span>
       </div>
       <div className="ml-2">
         {!!onRemove && (
