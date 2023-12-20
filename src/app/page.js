@@ -4,6 +4,7 @@ import HomeCategories from "./components/layout/HomeCategories";
 import HomeTestimonials from "./components/layout/HomeTestimonials";
 import HomeAboutUs from "./components/layout/HomeAboutUs";
 
+
 export default function Home() {
   return (
     <>

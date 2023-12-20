@@ -47,7 +47,7 @@ button[type="submit"]:disabled,
 }
 
 .flying-button-parent button {
- @apply border-primary  rounded-full px-6 py-2 border-0 bg-primary text-white;
+  @apply border-primary  rounded-full px-6 py-2 border-0 bg-primary text-white;
 }
 
 div.tabs > * {

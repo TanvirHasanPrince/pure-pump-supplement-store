@@ -1,5 +1,6 @@
 import Image from "next/image";
 import RightArrow from "../icons/RightArrow";
+import Link from "next/link";
 
 const Hero = () => {
   return (
@@ -21,15 +22,15 @@ const Hero = () => {
           Your journey to a stronger, fitter you begins here.
         </p>
         <div className="flex gap-4 text-sm">
-          <button className="bg-primary flex  items-center gap-2 text-white px-4 py-2 rounded-lg uppercase text-sm font-semibold">
+          <Link href={'/products'} className="bg-primary flex  items-center gap-2 text-white px-4 py-2 rounded-lg uppercase text-sm font-semibold">
             Order Now!
             <RightArrow />
-          </button>
+          </Link>
 
-          <button className="bg-secondary flex  items-center gap-2 text-black px-4 py-2 rounded-lg uppercase text-sm font-semibold">
+          <Link href={'/#about'} className="bg-secondary flex  items-center gap-2 text-black px-4 py-2 rounded-lg uppercase text-sm font-semibold">
             Learn More!
             <RightArrow />
-          </button>
+          </Link>
         </div>
       </div>
 

@@ -3,6 +3,7 @@ import "./globals.css";
 import Header from "./components/layout/Header";
 import AppProvider from './components/appContext'
 import { Toaster } from "react-hot-toast";
+import FooterSection from '../app/components/layout/Footer'
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -23,6 +24,7 @@ export default function RootLayout({ children }) {
             <Toaster />
             <Header></Header>
             {children}
+            <FooterSection></FooterSection>
           </AppProvider>
         </main>
       </body>

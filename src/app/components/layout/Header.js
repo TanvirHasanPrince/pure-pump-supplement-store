@@ -11,7 +11,6 @@ const Header = () => {
   const session = useSession();
 
   const status = session.status;
-  console.log(status);
   const userData = session?.data?.user;
   let userName = userData?.name || userData?.email;
   const { cartProducts } = useContext(CartContext);
@@ -96,7 +95,7 @@ const Header = () => {
             <Link href={"/"}>Home</Link>
             <Link href={"/products"}>Supplements</Link>
             <Link href={"/#about"}>About</Link>
-            <Link href={""}>Contact</Link>
+            <Link href={"/#contact"}>Contact</Link>
             <AuthLinks status={status} userName={userName}></AuthLinks>
           </nav>
         </div>
@@ -112,7 +111,7 @@ const Header = () => {
           <Link href={"/"}>Home</Link>
           <Link href={"/products"}>Supplements</Link>
           <Link href={"/#about"}>About</Link>
-          <Link href={""}>Contact</Link>
+          <Link href={"/#contact"}>Contact</Link>
         </nav>
 
         <nav className="flex items-center justify-between gap-4 font-bold">
