@@ -71,7 +71,7 @@ const SupplementItem = (supplementItem) => {
                         name={size.name}
                         onClick={() => setSelectedSize(size)}
                       />{" "}
-                      {size.name} BDT {basePrice + size.price}
+                      {size.name} $ {basePrice + size.price}
                     </label>
                   ))}
                 </div>
