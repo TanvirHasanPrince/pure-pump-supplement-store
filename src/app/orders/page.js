@@ -15,25 +15,25 @@ const OrdersPage = () => {
     fetchOrders();
   }, []);
 
-function fetchOrders() {
-  setLoadingOrders(true);
-  fetch("/api/orders")
-    .then((res) => {
-      if (!res.ok) {
-        throw new Error(`Network response was not ok: ${res.status}`);
-      }
-      return res.json();
-    })
-    .then((orders) => {
-      setOrders(orders.reverse());
-      setLoadingOrders(false);
-    })
-    .catch((error) => {
-      console.error("Error fetching orders:", error);
-      // Handle error state, e.g., set an error flag or show an error message to the user
-      setLoadingOrders(false);
-    });
-}
+  function fetchOrders() {
+    setLoadingOrders(true);
+    fetch("/api/orders")
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error(`Network response was not ok: ${res.status}`);
+        }
+        return res.json();
+      })
+      .then((orders) => {
+        setOrders(orders.reverse());
+        setLoadingOrders(false);
+      })
+      .catch((error) => {
+        console.error("Error fetching orders:", error);
+        // Handle error state, e.g., set an error flag or show an error message to the user
+        setLoadingOrders(false);
+      });
+  }
 
   if (profileLoading) {
     return "loading orders....Please wait";
