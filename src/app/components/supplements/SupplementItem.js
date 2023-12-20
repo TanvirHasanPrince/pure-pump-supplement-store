@@ -71,7 +71,7 @@ const SupplementItem = (supplementItem) => {
                         name={size.name}
                         onClick={() => setSelectedSize(size)}
                       />{" "}
-                      {size.name} $ {basePrice + size.price}
+                      {size.name} ${basePrice + size.price}
                     </label>
                   ))}
                 </div>
@@ -103,7 +103,7 @@ const SupplementItem = (supplementItem) => {
                 className="primary sticky bottom-2"
                 type="button"
               >
-                Add to cart $ {selectedPrice}
+                Add to cart ${selectedPrice}
               </button>
             </div>
           </div>

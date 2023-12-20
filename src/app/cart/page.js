@@ -121,7 +121,7 @@ const CartPage = () => {
               Total:
             </div>
             <div className=" font-semibold pl-2 text-right">
-              $ {subTotal} <br />$ 50 <br></br> {subTotal + 50}
+              ${subTotal} <br />$50 <br></br> ${subTotal + 50}
             </div>
           </div>
         </div>
