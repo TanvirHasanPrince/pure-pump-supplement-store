@@ -9,8 +9,9 @@ import MenuIconBars3 from "../../components/icons/MenuIconBars3";
 
 const Header = () => {
   const session = useSession();
-  console.log(session);
+
   const status = session.status;
+  console.log(status);
   const userData = session?.data?.user;
   let userName = userData?.name || userData?.email;
   const { cartProducts } = useContext(CartContext);
@@ -39,21 +40,23 @@ const Header = () => {
       );
     }
 
-    if (status === "unauthenticated") {
-      <>
-        <Link
-          href={"/login"}
-          className="bg-primary text-white px-8 py-2 rounded-md"
-        >
-          Login
-        </Link>
-        <Link
-          href={"/register"}
-          className="bg-secondary text-black px-8 py-2 rounded-md"
-        >
-          Register
-        </Link>
-      </>;
+    if (status === "unauthenticated" || status === "loading") {
+      return (
+        <>
+          <Link
+            href={"/login"}
+            className="bg-primary text-white px-8 py-2 rounded-md"
+          >
+            Login
+          </Link>
+          <Link
+            href={"/register"}
+            className="bg-secondary text-black px-8 py-2 rounded-md"
+          >
+            Register
+          </Link>
+        </>
+      );
     }
   }
 
@@ -113,7 +116,7 @@ const Header = () => {
         </nav>
 
         <nav className="flex items-center justify-between gap-4 font-bold">
-          <AuthLinks status={status} userName={userName}></AuthLinks>
+          <AuthLinks status={status} userName={userName} />
 
           <Link href="/cart" className="relative">
             <ShoppingCart></ShoppingCart>
@@ -121,7 +124,6 @@ const Header = () => {
               {" "}
               {cartProducts.length}
             </span>
-         
           </Link>
         </nav>
       </div>

@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 import { SupplementItem } from "../../models/supplement-item";
-import { isAdmin } from "../auth/[...nextauth]/route";
+import { isAdmin } from "../auth/[...nextauth]/authOptions";
 
 export async function POST(req) {
   mongoose.connect(process.env.MONGO_URL);
