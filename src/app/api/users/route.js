@@ -4,7 +4,7 @@ import { isAdmin } from "../auth/[...nextauth]/authOptions";
 
 export async function GET() {
   mongoose.connect(process.env.MONGO_URL);
-  if (await isAdmin) {
+  if (await isAdmin()) {
     const users = await User.find();
 
     return Response.json(users);
