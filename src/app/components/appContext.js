@@ -71,7 +71,7 @@ function removeCartProducts(productIdToRemove) {
           {children}
         </CartContext.Provider>
       </SessionProvider>
-      ;
+      
     </div>
   );
 };
