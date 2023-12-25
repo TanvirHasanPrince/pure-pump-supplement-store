@@ -3,6 +3,7 @@ import HomeAccessories from "./components/layout/HomeAccessories";
 import HomeCategories from "./components/layout/HomeCategories";
 import HomeTestimonials from "./components/layout/HomeTestimonials";
 import HomeAboutUs from "./components/layout/HomeAboutUs";
+import FAQ from "./components/layout/FAQ";
 
 
 export default function Home() {
@@ -13,6 +14,7 @@ export default function Home() {
       {/* <HomeAccessories></HomeAccessories> */}
       <HomeAboutUs></HomeAboutUs>
       <HomeTestimonials></HomeTestimonials>
+      <FAQ></FAQ>
     </>
   );
 }
