@@ -15,8 +15,10 @@ const Accordion = () => {
                 Any Questions? Look Here
               </h2>
               <p className="text-base text-body-color dark:text-dark-6">
-                There are many variations of passages of Lorem Ipsum available
-                but the majority have suffered alteration in some form.
+                Unearth comprehensive answers to your queries in our FAQ
+                section, ensuring a seamless shopping experience. Explore with
+                confidence, as our expertly crafted responses guide you through
+                the world of supplements tailored to your needs.
               </p>
             </div>
           </div>
